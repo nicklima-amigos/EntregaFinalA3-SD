@@ -5,7 +5,7 @@ from routers.clients import clients_router
 from routers.products import products_router
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(title="A3 - Sistemas Distribuídos")
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,9 +14,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(sales_router, prefix="/sales", tags=["sales"])
-app.include_router(products_router, prefix="/products", tags=["products"])
-app.include_router(clients_router, prefix="/clients", tags=["clients"])
+app.include_router(sales_router)
+app.include_router(products_router)
+app.include_router(clients_router)
 
 
 @app.get("/healthcheck", status_code=200)
