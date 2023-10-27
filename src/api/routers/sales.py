@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 
-sales_router = APIRouter()
+sales_router = APIRouter(prefix="/sales", tags=["sales"])
 
 
 @sales_router.get("/")
