@@ -27,7 +27,7 @@ cd ./src/api && pip install -r requirements.txt && cd ../frontend && npm install
 <h4>3. Rodar o servidor da API </h4>
 
 ```bash
-cd ./src/api && python main.py
+cd ./src/api && python3 main.py
 ```
 
 <h4>4. Em um novo terminal, rodar o client: </h4>
