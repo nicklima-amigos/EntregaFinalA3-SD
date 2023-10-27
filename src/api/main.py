@@ -5,7 +5,7 @@ from routers.clients import clients_router
 from routers.products import products_router
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(title="A3 - Sistemas Distribuídos")
 
 app.add_middleware(
     CORSMiddleware,
