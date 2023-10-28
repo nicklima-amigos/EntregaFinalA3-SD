@@ -6,15 +6,15 @@
 
 <h3>É necessário ter o Python, pip e o node instalado.</h3>
 
-![Download do Python](https://www.python.org/downloads/)
-![Download do Node](https://nodejs.org/en)
+[Download do Python](https://www.python.org/downloads/)
+[Download do Node](https://nodejs.org/en)
 
 Para instalar o pip:
 ```bash
 cd src/api && pip install -r requirements.txt
 ```
 
-<h3>1. Clonar o projeto com o git e usar na sua IDE de preferência.</h4>
+<h4>1. Clonar o projeto com o git e usar na sua IDE de preferência.</h4>
 
 ```bash
 git clone https://github.com/nicklima-amigos/EntregaFinalA3-SD.git
