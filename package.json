@@ -1,0 +1,20 @@
+{
+  "name": "entregafinala3",
+  "version": "1.0.0",
+  "description": "Entrega Final - Projeto A3 - Sistemas Distribuídos",
+  "scripts": {
+    "install:api": "cd src/api && pip install -r requirements.txt",
+    "install:frontend": "cd src/frontend && npm install",
+    "start:api": "cd src/api && python main.py",
+    "start:frontend": "cd src/frontend && npm run dev",
+    "install:all": "npm run install:api && npm run install:frontend",
+    "start:all": "concurrently \"npm run start:api\" \"npm run start:frontend\"",
+    "install-and-start:all": "npm run install:all && npm run start:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
