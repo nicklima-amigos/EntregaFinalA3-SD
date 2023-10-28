@@ -34,7 +34,3 @@ class SalesRepository:
 
     def delete(self, id: int):
         return self.database.exec("DELETE FROM sales WHERE id = ?", [id])
-
-
-class SaleNotFoundException(Exception):
-    detail = "Sale not found"
