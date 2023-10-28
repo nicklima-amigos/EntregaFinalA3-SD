@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from dependencies import get_clients_service
-from schemas.clients import Client, CreateClient, UpdateClient
+from schemas.clients import Client, ClientDetail, CreateClient, UpdateClient
 
 from service.clients import ClientService
 
@@ -13,7 +13,7 @@ def find(service: ClientService = Depends(get_clients_service)):
     return service.find_all()
 
 
-@clients_router.get("/{id}", response_model=Client)
+@clients_router.get("/{id}", response_model=ClientDetail)
 def find_one(id: int, service: ClientService = Depends(get_clients_service)):
     return service.find_one(id)
 
