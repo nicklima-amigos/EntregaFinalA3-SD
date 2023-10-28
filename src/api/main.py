@@ -19,7 +19,7 @@ app.include_router(products_router)
 app.include_router(clients_router)
 
 
-@app.get("/healthcheck", status_code=200)
+@app.get("/healthcheck", status_code=200, tags=["healthcheck"])
 def index():
     return {"status": "ok"}
 
