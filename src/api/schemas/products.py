@@ -17,3 +17,9 @@ class UpdateProduct(ProductBase):
 
 class Product(ProductBase):
     id: int
+
+
+class ProductInformation(BaseModel):
+    id: int
+    name: str
+    price: float

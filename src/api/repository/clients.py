@@ -1,3 +1,5 @@
+from schemas.products import ProductInformation
+from schemas.sales import ClientDetail, SaleWithProduct
 from persistence.database import Database
 from schemas.clients import Client, CreateClient, UpdateClient
 
@@ -7,14 +9,40 @@ class ClientsRepository:
         self.database = database
 
     def find_all(self):
-        rows = self.database.query("SELECT * FROM clients")
-        return [Client(**row) for row in rows]
+        rows = self.database.query("SELECT id, name, created_at FROM clients")
+        return [
+            Client(id=id, name=name, created_at=created_at)
+            for (id, name, created_at) in rows
+        ]
 
     def find_one(self, id: int):
-        row = self.database.query_one("SELECT * FROM clients WHERE id = ?", [id])
-        if row is None:
-            return None
-        return Client(**row)
+        rows = self.database.query(
+            """
+            SELECT 
+                c.id, c.name, c.created_at, s.id, s.quantity, p.id, p.name, p.price
+            FROM 
+                clients c
+            LEFT JOIN 
+                sales s ON s.client_id = c.id
+            LEFT JOIN
+                products p ON p.id = s.product_id 
+            WHERE 
+                c.id = ?
+        """,
+            [id],
+        )
+        sales = [
+            SaleWithProduct(
+                id=row[3],
+                quantity=row[4],
+                product=ProductInformation(id=row[5], name=row[6], price=row[7]),
+            )
+            for row in rows
+            if row[3] is not None
+        ]
+        return ClientDetail(
+            id=rows[0][0], name=rows[0][1], created_at=rows[0][2], sales=sales
+        )
 
     def create(self, client: CreateClient):
         last_insert_id = self.database.exec(

@@ -1,5 +1,8 @@
+from math import prod
+from schemas.clients import Client
+from schemas.products import ProductInformation
 from persistence.database import Database
-from schemas.sales import CreateSale, Sale, UpdateSale
+from schemas.sales import CreateSale, Sale, SaleDetails, UpdateSale
 
 
 class SalesRepository:
@@ -7,14 +10,54 @@ class SalesRepository:
         self.database = database
 
     def find_all(self):
-        rows = self.database.query("SELECT * FROM sales")
-        return [Sale(**row) for row in rows]
+        rows = self.database.query(
+            "SELECT id, product_id, client_id, quantity FROM sales"
+        )
+        return [
+            Sale(id=id, product_id=product_id, client_id=client_id, quantity=quantity)
+            for (id, product_id, client_id, quantity) in rows
+        ]
 
     def find_one(self, id: int):
-        row = self.database.query_one("SELECT * FROM sales WHERE id = ?", [id])
+        row = self.database.query_one(
+            """
+            SELECT 
+                s.id, s.quantity,
+                p.id, p.name, p.price,
+                c.id, c.name, c.created_at
+            FROM 
+                sales s
+            JOIN
+                products p ON p.id = s.product_id
+            JOIN
+                clients c ON c.id = s.client_id
+            WHERE 
+                id = ?
+        """,
+            [id],
+        )
         if row is None:
             return None
-        return Sale(**row)
+        (
+            sale_id,
+            sale_quantity,
+            product_id,
+            product_name,
+            product_price,
+            client_id,
+            client_name,
+            client_created_at,
+        ) = row
+        product = ProductInformation(
+            id=product_id, name=product_name, price=product_price
+        )
+        client = Client(id=client_id, name=client_name, created_at=client_created_at)
+        return SaleDetails(
+            id=sale_id,
+            product=product,
+            client=client,
+            quantity=sale_quantity,
+        )
 
     def create(self, sale: CreateSale):
         last_insert_id = self.database.exec(

@@ -7,14 +7,20 @@ class ProductsRepository:
         self.database = database
 
     def find_all(self):
-        rows = self.database.query("SELECT * FROM products")
-        return [Product(**row) for row in rows]
+        rows = self.database.query("SELECT id, name, price, quantity FROM products")
+        return [
+            Product(id=id, name=name, price=price, quantity=quantity)
+            for (id, name, price, quantity) in rows
+        ]
 
     def find_one(self, id: int):
-        row = self.database.query_one("SELECT * FROM products WHERE id = ?", [id])
+        row = self.database.query_one(
+            "SELECT id, name, price, quantity FROM products WHERE id = ?", [id]
+        )
         if row is None:
             return None
-        return Product(**row)
+        (id, name, price, quantity) = row
+        return Product(id=id, name=name, price=price, quantity=quantity)
 
     def create(self, product: CreateProduct):
         last_insert_id = self.database.exec(
