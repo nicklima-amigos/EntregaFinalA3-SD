@@ -31,6 +31,8 @@ class ClientsRepository:
         """,
             [id],
         )
+        if len(rows) == 0:
+            return None
         sales = [
             SaleWithProduct(
                 id=row[3],
