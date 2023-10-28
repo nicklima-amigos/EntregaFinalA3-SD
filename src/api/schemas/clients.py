@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from .products import ProductInformation
 
 
 class ClientBase(BaseModel):
@@ -19,4 +20,21 @@ class Client(ClientBase):
     created_at: datetime
 
 
+class SaleWithProduct(BaseModel):
+    id: int
+    product: ProductInformation
+    quantity: int
 
+
+class ClientDetail(BaseModel):
+    id: int
+    name: str
+    created_at: datetime
+    sales: list[SaleWithProduct]
+
+
+class SaleDetails(BaseModel):
+    id: int
+    product: ProductInformation
+    client: Client
+    quantity: int

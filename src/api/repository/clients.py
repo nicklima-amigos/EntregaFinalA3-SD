@@ -1,5 +1,5 @@
 from schemas.products import ProductInformation
-from schemas.sales import ClientDetail, SaleWithProduct
+from schemas.clients import ClientDetail, SaleWithProduct
 from persistence.database import Database
 from schemas.clients import Client, CreateClient, UpdateClient
 
