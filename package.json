@@ -5,7 +5,7 @@
   "scripts": {
     "install:api": "cd src/api && pip install -r requirements.txt",
     "install:frontend": "cd src/frontend && npm install",
-    "start:api": "cd src/api && python main.py",
+    "start:api": "cd src/api && python3 main.py",
     "start:frontend": "cd src/frontend && npm run dev",
     "install:all": "npm run install:api && npm run install:frontend",
     "start:all": "concurrently \"npm run start:api\" \"npm run start:frontend\"",
