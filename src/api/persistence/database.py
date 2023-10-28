@@ -1,8 +1,8 @@
 import sqlite3
-from persistence.schema import schema
+from .schema import schema
 
 
-def __init_db():
+def init_db():
     with sqlite3.connect("database.sqlite3") as connection:
         connection.executescript(schema)
 
