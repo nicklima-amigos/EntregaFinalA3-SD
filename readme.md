@@ -12,26 +12,20 @@ Linux:
 cd ./src/api && python3 -m venv .venv && source ./.venv/bin/activate && cd ../../
 ```
 
-Windows:
+Windows (PowerShell):
 
 ```bash
-cd ./src/api && python3 -m venv .venv && source ./.venv/Scripts/Activate && cd ../../
+cd .\src\api && python -m venv .venv && .\.venv\Scripts\Activate && cd ..\..\
 ```
 
 <h4>2. Instalar as dependências </h4>
 
 ```bash
-cd ./src/api && pip install -r requirements.txt && cd ../frontend && npm install && cd ../../
+npm install && npm run install:all
 ```
 
-<h4>3. Rodar o servidor da API </h4>
+<h4>3. Executar server e client </h4>
 
 ```bash
-cd ./src/api && python3 main.py
-```
-
-<h4>4. Em um novo terminal, rodar o client: </h4>
-
-```bash
-cd ./src/frontend && npm run dev
+npm run start:all
 ```
