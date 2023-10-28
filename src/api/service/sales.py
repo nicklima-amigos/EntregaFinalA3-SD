@@ -1,7 +1,7 @@
 from fastapi import HTTPException
-from api.repository.products import ProductsRepository
-from api.repository.sales import SalesRepository
-from api.schemas.sales import CreateSale
+from repository.products import ProductsRepository
+from repository.sales import SalesRepository
+from schemas.sales import CreateSale, UpdateSale
 
 
 class SalesService:
@@ -25,6 +25,8 @@ class SalesService:
             raise HTTPException(status_code=422, detail="Not enough product in stock")
         return self.repository.create(sale)
 
+    def update(self, id: int, sale: UpdateSale):
+        return self.repository.update(id, sale)
 
-class InsuficientStockError(Exception):
-    detail = "Not enough product in stock"
+    def delete(self, id: int):
+        return self.repository.delete(id)

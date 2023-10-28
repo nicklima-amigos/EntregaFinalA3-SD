@@ -1,6 +1,5 @@
-from api.persistence.database import Database
-from api.schemas.clients import Client, CreateClient
-from datetime import datetime
+from persistence.database import Database
+from schemas.clients import Client, CreateClient, UpdateClient
 
 
 class ClientsRepository:
@@ -23,3 +22,13 @@ class ClientsRepository:
         if last_insert_id is None:
             return None
         return self.find_one(last_insert_id)
+
+    def update(self, id: int, client: UpdateClient):
+        self.database.exec(
+            "UPDATE clients SET name = ? WHERE id = ?",
+            [client.name, id],
+        )
+        return self.find_one(id)
+
+    def delete(self, id: int):
+        return self.database.exec("DELETE FROM clients WHERE id = ?", [id])

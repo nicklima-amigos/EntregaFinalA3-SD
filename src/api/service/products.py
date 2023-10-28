@@ -1,5 +1,5 @@
-from api.repository.products import ProductsRepository
-from api.schemas.products import CreateProduct
+from repository.products import ProductsRepository
+from schemas.products import CreateProduct, UpdateProduct
 
 
 class ProductsService:
@@ -14,6 +14,12 @@ class ProductsService:
 
     def create(self, product: CreateProduct):
         return self.repository.create(product)
+
+    def update(self, id: int, product: UpdateProduct):
+        return self.repository.update(id, product)
+
+    def delete(self, id: int):
+        return self.repository.delete(id)
 
 
 class ProductNotFoundError(Exception):

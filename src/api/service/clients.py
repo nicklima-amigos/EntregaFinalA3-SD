@@ -1,6 +1,5 @@
-from api.persistence.database import Database
-from api.repository.clients import ClientsRepository
-from api.schemas.clients import Client, CreateClient
+from repository.clients import ClientsRepository
+from schemas.clients import CreateClient, UpdateClient
 
 
 class ClientService:
@@ -15,3 +14,9 @@ class ClientService:
 
     def create(self, client: CreateClient):
         return self.repository.create(client)
+
+    def update(self, id: int, client: UpdateClient):
+        return self.repository.update(id, client)
+
+    def delete(self, id: int):
+        return self.repository.delete(id)

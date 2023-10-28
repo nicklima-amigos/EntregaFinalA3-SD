@@ -1,5 +1,5 @@
 import sqlite3
-from api.persistence.schema import schema
+from persistence.schema import schema
 
 
 class Database:

@@ -1,9 +1,9 @@
 from fastapi import Depends
-from api.repository.products import ProductsRepository
-from api.repository.sales import SalesRepository
-from api.service.clients import ClientService
-from api.service.products import ProductsService
-from api.service.sales import SalesService
+from repository.products import ProductsRepository
+from repository.sales import SalesRepository
+from service.clients import ClientService
+from service.products import ProductsService
+from service.sales import SalesService
 from persistence.database import Database
 from repository.clients import ClientsRepository
 

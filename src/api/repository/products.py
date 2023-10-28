@@ -1,5 +1,5 @@
-from api.persistence.database import Database
-from api.schemas.products import CreateProduct, Product
+from persistence.database import Database
+from schemas.products import CreateProduct, Product, UpdateProduct
 
 
 class ProductsRepository:
@@ -22,3 +22,13 @@ class ProductsRepository:
         if last_insert_id is None:
             return None
         return self.find_one(last_insert_id)
+
+    def update(self, id: int, product: UpdateProduct):
+        self.database.exec(
+            "UPDATE products SET name = ?, price = ?, quantity = ? WHERE id = ?",
+            [product.name, product.price, product.quantity, id],
+        )
+        return self.find_one(id)
+
+    def delete(self, id: int):
+        return self.database.exec("DELETE FROM products WHERE id = ?", [id])

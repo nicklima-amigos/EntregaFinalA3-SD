@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends
-from api.dependencies import get_sales_service
-from api.schemas.sales import CreateSale
-
-from api.service.sales import SalesService
+from dependencies import get_sales_service
+from schemas.sales import CreateSale, UpdateSale
+from service.sales import SalesService
 
 
 sales_router = APIRouter(prefix="/sales", tags=["sales"])
@@ -24,10 +23,12 @@ def create(sale: CreateSale, service: SalesService = Depends(get_sales_service))
 
 
 @sales_router.put("/{id}")
-def update(id: int):
-    pass
+def update(
+    id: int, sale: UpdateSale, service: SalesService = Depends(get_sales_service)
+):
+    return service.update(id, sale)
 
 
 @sales_router.delete("/{id}")
-def delete(id: int):
-    pass
+def delete(id: int, service: SalesService = Depends(get_sales_service)):
+    return service.delete(id)
