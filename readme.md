@@ -35,7 +35,7 @@ Windows (PowerShell):
 cd .\src\api && python -m venv .venv && .\.venv\Scripts\Activate && cd ..\..\
 ```
 
-<h4>3. Instalar as dependências dentro da pasta raiz do projeto </h4>
+<h4>3. De dentro da pasta raiz do projeto, rodar o comando para instalar as dependências </h4>
 
 ```bash
 npm install && npm run install:all
