@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from repository.products import ProductsRepository
 from schemas.products import CreateProduct, UpdateProduct
 
@@ -10,17 +11,20 @@ class ProductsService:
         return self.repository.find_all()
 
     def find_one(self, id: int):
-        return self.repository.find_one(id)
+        product = self.repository.find_one(id)
+        if product is None:
+            raise HTTPException(status_code=404, detail="Product not found")
+        return product
 
     def create(self, product: CreateProduct):
         return self.repository.create(product)
 
     def update(self, id: int, product: UpdateProduct):
-        return self.repository.update(id, product)
+        updated_product = self.repository.update(id, product)
+        if updated_product is None:
+            raise HTTPException(status_code=404, detail="Product not found")
+        return updated_product
 
     def delete(self, id: int):
+        self.find_one(id)
         return self.repository.delete(id)
-
-
-class ProductNotFoundError(Exception):
-    detail = "Product not found"

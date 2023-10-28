@@ -9,7 +9,7 @@ schema = """
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
         price REAL NOT NULL,
-        quantity INTEGER NOT NULL,
+        quantity INTEGER NOT NULL
     );
     
     CREATE TABLE IF NOT EXISTS sales (

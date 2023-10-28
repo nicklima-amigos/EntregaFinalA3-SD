@@ -12,6 +12,8 @@ class ProductsRepository:
 
     def find_one(self, id: int):
         row = self.database.query_one("SELECT * FROM products WHERE id = ?", [id])
+        if row is None:
+            return None
         return Product(**row)
 
     def create(self, product: CreateProduct):

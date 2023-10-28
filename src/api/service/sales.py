@@ -1,3 +1,4 @@
+from signal import raise_signal
 from fastapi import HTTPException
 from repository.products import ProductsRepository
 from repository.sales import SalesRepository
@@ -15,7 +16,10 @@ class SalesService:
         return self.repository.find_all()
 
     def find_one(self, id: int):
-        return self.repository.find_one(id)
+        sale = self.repository.find_one(id)
+        if sale is None:
+            raise HTTPException(status_code=404, detail="Sale not found")
+        return sale
 
     def create(self, sale: CreateSale):
         product = self.products_repository.find_one(sale.product_id)
@@ -26,7 +30,11 @@ class SalesService:
         return self.repository.create(sale)
 
     def update(self, id: int, sale: UpdateSale):
-        return self.repository.update(id, sale)
+        updated_sale = self.repository.update(id, sale)
+        if updated_sale is None:
+            raise HTTPException(status_code=404, detail="Sale not found")
+        return updated_sale
 
     def delete(self, id: int):
+        self.find_one(id)
         return self.repository.delete(id)

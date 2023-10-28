@@ -12,6 +12,8 @@ class ClientsRepository:
 
     def find_one(self, id: int):
         row = self.database.query_one("SELECT * FROM clients WHERE id = ?", [id])
+        if row is None:
+            return None
         return Client(**row)
 
     def create(self, client: CreateClient):
