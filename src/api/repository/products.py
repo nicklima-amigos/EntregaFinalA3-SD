@@ -38,5 +38,12 @@ class ProductsRepository:
         )
         return self.find_one(id)
 
+    def update_quantity(self, id: int, quantity: int):
+        self.database.exec(
+            "UPDATE products SET quantity = ? WHERE id = ?",
+            [quantity, id],
+        )
+        return self.find_one(id)
+
     def delete(self, id: int):
         return self.database.exec("DELETE FROM products WHERE id = ?", [id])

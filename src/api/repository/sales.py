@@ -31,7 +31,7 @@ class SalesRepository:
             JOIN
                 clients c ON c.id = s.client_id
             WHERE 
-                id = ?
+                s.id = ?
         """,
             [id],
         )
@@ -60,7 +60,7 @@ class SalesRepository:
 
     def create(self, sale: CreateSale):
         last_insert_id = self.database.exec(
-            "INSERT INTO sales (client_id, product_id, quantity) VALUES (?)",
+            "INSERT INTO sales (client_id, product_id, quantity) VALUES (?, ?, ?)",
             [sale.client_id, sale.product_id, sale.quantity],
         )
         if last_insert_id is None:

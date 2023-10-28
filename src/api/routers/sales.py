@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from schemas.clients import SaleDetails
 from dependencies import get_sales_service
 from schemas.sales import CreateSale, Sale, UpdateSale
 from service.sales import SalesService
@@ -12,12 +13,12 @@ def find(service: SalesService = Depends(get_sales_service)):
     return service.find_all()
 
 
-@sales_router.get("/{id}", response_model=Sale)
+@sales_router.get("/{id}", response_model=SaleDetails)
 def find_one(id: int, service: SalesService = Depends(get_sales_service)):
     return service.find_one(id)
 
 
-@sales_router.post("/", response_model=Sale, status_code=201)
+@sales_router.post("/", response_model=SaleDetails, status_code=201)
 def create(sale: CreateSale, service: SalesService = Depends(get_sales_service)):
     return service.create(sale)
 

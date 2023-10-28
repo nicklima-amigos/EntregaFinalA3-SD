@@ -1,4 +1,3 @@
-from signal import raise_signal
 from fastapi import HTTPException
 from repository.products import ProductsRepository
 from repository.sales import SalesRepository
@@ -27,6 +26,8 @@ class SalesService:
             raise HTTPException(status_code=404, detail="Product not found")
         if product.quantity < sale.quantity:
             raise HTTPException(status_code=422, detail="Not enough product in stock")
+        product.quantity -= sale.quantity
+        self.products_repository.update_quantity(product.id, product.quantity)
         return self.repository.create(sale)
 
     def update(self, id: int, sale: UpdateSale):
