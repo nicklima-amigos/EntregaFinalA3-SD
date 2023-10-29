@@ -1,4 +1,5 @@
 import sqlite3
+from .fixtures import init_values
 from .schema import schema
 
 
@@ -6,6 +7,9 @@ def init_db():
     with sqlite3.connect("database.sqlite3") as connection:
         connection.executescript(schema)
 
+def init_values_db():
+    with sqlite3.connect("database.sqlite3") as connection:
+        connection.executescript(init_values)
 
 class Database:
     def __init__(self, database_name: str = "database.sqlite3"):
