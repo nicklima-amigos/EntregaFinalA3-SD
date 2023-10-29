@@ -42,13 +42,14 @@ class SalesRepository:
             sale_quantity,
             product_id,
             product_name,
+            product_brand,
             product_price,
             client_id,
             client_name,
             client_created_at,
         ) = row
         product = ProductInformation(
-            id=product_id, name=product_name, price=product_price
+            id=product_id, name=product_name,brand = product_brand, price=product_price
         )
         client = Client(id=client_id, name=client_name, created_at=client_created_at)
         return SaleDetails(

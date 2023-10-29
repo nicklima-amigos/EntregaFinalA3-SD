@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers.sales import sales_router
 from routers.clients import clients_router
 from routers.products import products_router
-from persistence.database import init_db
+from persistence.database import init_db, init_values_db
 import uvicorn
 
 app = FastAPI(title="A3 - Sistemas Distribuídos")
@@ -27,4 +27,5 @@ def index():
 
 if __name__ == "__main__":
     init_db()
+    init_values_db()
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

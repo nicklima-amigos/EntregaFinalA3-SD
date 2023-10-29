@@ -8,6 +8,7 @@ schema = """
     CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
+        brand TEXT NOT NULL,
         price REAL NOT NULL,
         quantity INTEGER NOT NULL
     );

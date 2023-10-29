@@ -7,25 +7,25 @@ class ProductsRepository:
         self.database = database
 
     def find_all(self):
-        rows = self.database.query("SELECT id, name, price, quantity FROM products")
+        rows = self.database.query("SELECT id, name, brand, price, quantity FROM products")
         return [
-            Product(id=id, name=name, price=price, quantity=quantity)
-            for (id, name, price, quantity) in rows
+            Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
+            for (id, name, brand, price, quantity) in rows
         ]
 
     def find_one(self, id: int):
         row = self.database.query_one(
-            "SELECT id, name, price, quantity FROM products WHERE id = ?", [id]
+            "SELECT id, name, brand, price, quantity FROM products WHERE id = ?", [id]
         )
         if row is None:
             return None
-        (id, name, price, quantity) = row
-        return Product(id=id, name=name, price=price, quantity=quantity)
+        (id, name, brand, price, quantity) = row
+        return Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
 
     def create(self, product: CreateProduct):
         last_insert_id = self.database.exec(
-            "INSERT INTO products (name, price, quantity) VALUES (?, ?, ?)",
-            [product.name, product.price, product.quantity],
+            "INSERT INTO products (name, brand, price, quantity) VALUES (?, ?, ?, ?)",
+            [product.name, product.brand, product.price, product.quantity],
         )
         if last_insert_id is None:
             return None
@@ -33,8 +33,8 @@ class ProductsRepository:
 
     def update(self, id: int, product: UpdateProduct):
         self.database.exec(
-            "UPDATE products SET name = ?, price = ?, quantity = ? WHERE id = ?",
-            [product.name, product.price, product.quantity, id],
+            "UPDATE products SET name = ?, brand = ?, price = ?, quantity = ? WHERE id = ?",
+            [product.name, product.brand, product.price, product.quantity, id],
         )
         return self.find_one(id)
 
