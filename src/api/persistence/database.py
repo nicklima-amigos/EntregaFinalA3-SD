@@ -9,7 +9,15 @@ def init_db():
 
 def init_values_db():
     with sqlite3.connect("database.sqlite3") as connection:
-        connection.executescript(init_values)
+        cursor = connection.cursor()
+        try:
+            cursor.executescript(init_values)
+            connection.commit()
+        except sqlite3.IntegrityError as e:
+            print("Erro de unicidade", e)
+        finally:
+            cursor.close()
+        
 
 class Database:
     def __init__(self, database_name: str = "database.sqlite3"):
