@@ -9,12 +9,12 @@ fixtures = """
     INSERT INTO products (id, name, brand, price, quantity) VALUES 
     (1,"Ar Condicionado","LG",2.179, 5),
     (2,"Maquina de Lavar","Samsung",1.699,12),
-    (3,"Fritadeira Air Fry","Mondial",229,5),
-    (4,"Micro-onda","Philco",583,3),
+    (3,"Fritadeira Air Frier","Mondial",229,5),
+    (4,"Micro ondas","Philco",583,3),
     (5,"Ventilador de teto","Ventisol", 200, 20),
     (6,"Panela de pressao eletrica","Mondial", 399, 10),
-    (7,"Robo aspirador","Mondial",666,14),
-    (8,"Geladeira frost fee","Electrolux",2.584,4),
+    (7,"Robô aspirador","Mondial",666,14),
+    (8,"Geladeira frost free","Electrolux",2.584,4),
     (9,"Freezer horizontal","Electrolux",2.6999,12),
     (10,"Fogao de pé","Electrolux",2.299,7);
 
