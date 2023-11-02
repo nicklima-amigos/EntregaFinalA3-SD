@@ -1,30 +1,51 @@
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { format } from 'date-fns';
 
 export function SingleClient({ client }) {
-  const { id, name, created_at } = client;
-  const createdAt = new Date(created_at).toUTCString('PT-Br');
+  const { name, created_at } = client;
+  const createdAt = format(new Date(created_at), 'dd/MM/yyyy');
   return (
-    <Box
-      key={id}
+    <Grid2
       sx={{
         width: 1,
         display: 'flex',
         justifyContent: 'space-between',
         textAlign: 'center',
+        marginBottom: 2,
       }}
+      xs={12}
     >
-      <Box sx={{ width: '30%', borderBottom: 'solid 1px black' }}>{name}</Box>
-      <Box sx={{ width: '30%', borderBottom: 'solid 1px black' }}>
+      <Grid2
+        sx={{
+          borderBottom: 'solid 1px black',
+          textAlign: 'center',
+          marginTop: 1,
+        }}
+        xs={4}
+      >
+        {name}
+      </Grid2>
+      <Grid2
+        sx={{
+          borderBottom: 'solid 1px black',
+          marginTop: 1,
+        }}
+        xs={4}
+      >
         {createdAt}
-      </Box>
-      <Box sx={{ width: '20%', borderBottom: 'solid 1px black' }}>
-        {' '}
-        <Button>Editar</Button>{' '}
-      </Box>
-      <Box sx={{ width: '20%', borderBottom: 'solid 1px black' }}>
-        {' '}
-        <Button>Excluir</Button>{' '}
-      </Box>
-    </Box>
+      </Grid2>
+      <Grid2 sx={{ borderBottom: 'solid 1px black' }} xs={2}>
+        <Button sx={{ margin: 'auto' }}>Editar</Button>
+      </Grid2>
+      <Grid2
+        sx={{
+          borderBottom: 'solid 1px black',
+        }}
+        xs={2}
+      >
+        <Button color='error'>Excluir</Button>
+      </Grid2>
+    </Grid2>
   );
 }

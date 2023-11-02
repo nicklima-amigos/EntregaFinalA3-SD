@@ -1,11 +1,13 @@
-import { Button } from '@mui/material';
-import { Box } from '@mui/material';
+import { Button, Container } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { grey } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { SingleClient } from '../components/clients/SingleClient/SingleClient';
-import { grey } from '@mui/material/colors';
 
 export function Clients() {
   const [clients, setClients] = useState([]);
+
+  const tableColumnWidths = ['30%', '30%', '20%', '20%'];
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -18,10 +20,11 @@ export function Clients() {
   }, []);
 
   return (
-    <>
-      <Button>Cadastrar Cliente</Button>
+    <Container sx={{ maxWidth: 1000, textAlign: 'center' }}>
+      <Button sx={{ margin: 2 }}>Cadastrar Cliente</Button>
 
-      <Box
+      <Grid2
+        container
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -30,25 +33,35 @@ export function Clients() {
           textAlign: 'center',
         }}
       >
-        <Box
+        <Grid2
+          container
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            width: 1,
             marginBottom: 2,
             borderBottom: 'solid 1px black',
             backgroundColor: grey[200],
+            borderRadius: 2,
+            borderEndEndRadius: 0,
+            borderEndStartRadius: 0,
           }}
+          xs={12}
         >
-          <Box sx={{ width: '30%' }}>Nome:</Box>
-          <Box sx={{ width: '30%' }}>Data de criação:</Box>
-          <Box sx={{ width: '20%' }}></Box>
-          <Box sx={{ width: '20%' }}></Box>
-        </Box>
-        {clients.map((client) => {
-          return SingleClient({ client });
+          <Grid2 xs={4}>Nome:</Grid2>
+          <Grid2 xs={4}>Data de criação:</Grid2>
+          <Grid2 xs={2}></Grid2>
+          <Grid2 xs={2}></Grid2>
+        </Grid2>
+        {clients.map((client, index) => {
+          return (
+            <SingleClient
+              key={index}
+              client={client}
+              tableColumnWidths={tableColumnWidths}
+            />
+          );
         })}
-      </Box>
-    </>
+      </Grid2>
+    </Container>
   );
 }
