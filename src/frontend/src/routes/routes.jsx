@@ -1,8 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Root } from '../components/Root/Root';
-import { Home } from '../pages/Home';
-import { Clients } from '../pages/Clients';
 import { Navbar } from '../components/Navbar/Navbar';
+import { Root } from '../components/Root/Root';
+import { Clients } from '../pages/Clients/Clients';
+import { CreateClient } from '../pages/Clients/CreateClient';
+import { UpdateClient } from '../pages/Clients/UpdateClient';
+import { Home } from '../pages/Home';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
       {
         path: 'clientes',
         element: <Clients />,
+      },
+      {
+        path: 'clientes/cadastrar',
+        element: <CreateClient />,
+      },
+      {
+        path: 'clientes/atualizar/:id',
+        element: <UpdateClient />,
       },
       {
         path: 'produtos',

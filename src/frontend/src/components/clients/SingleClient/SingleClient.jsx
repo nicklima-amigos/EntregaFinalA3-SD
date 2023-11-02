@@ -1,9 +1,10 @@
 import { Button } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 export function SingleClient({ client }) {
-  const { name, created_at } = client;
+  const { id, name, created_at } = client;
   const createdAt = format(new Date(created_at), 'dd/MM/yyyy');
   return (
     <Grid2
@@ -36,7 +37,9 @@ export function SingleClient({ client }) {
         {createdAt}
       </Grid2>
       <Grid2 sx={{ borderBottom: 'solid 1px black' }} xs={2}>
-        <Button sx={{ margin: 'auto' }}>Editar</Button>
+        <Link to={`/clientes/atualizar/${id}`}>
+          <Button sx={{ margin: 'auto' }}>Editar</Button>
+        </Link>
       </Grid2>
       <Grid2
         sx={{

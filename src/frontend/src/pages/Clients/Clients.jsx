@@ -1,15 +1,18 @@
 import { Button, Container } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { grey } from '@mui/material/colors';
-import { SingleClient } from '../components/clients/SingleClient/SingleClient';
-import { useClients } from '../components/hooks/useClients';
+import { SingleClient } from '../../components/clients/SingleClient/SingleClient';
+import { useClients } from '../../hooks/useClients';
+import { Link } from 'react-router-dom';
 
 export function Clients() {
   const { clients } = useClients();
 
   return (
     <Container sx={{ maxWidth: 1000, textAlign: 'center' }}>
-      <Button sx={{ margin: 2 }}>Cadastrar Cliente</Button>
+      <Link to='/clientes/cadastrar'>
+        <Button sx={{ margin: 2 }}>Cadastrar Cliente</Button>
+      </Link>
 
       <Grid2
         container
