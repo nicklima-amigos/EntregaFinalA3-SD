@@ -7,8 +7,8 @@ export function SingleClient({ client }) {
   const createdAt = format(new Date(created_at), 'dd/MM/yyyy');
   return (
     <Grid2
+      container
       sx={{
-        width: 1,
         display: 'flex',
         justifyContent: 'space-between',
         textAlign: 'center',
