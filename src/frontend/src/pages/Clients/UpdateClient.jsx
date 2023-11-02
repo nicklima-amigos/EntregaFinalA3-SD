@@ -9,12 +9,9 @@ export function UpdateClient() {
   const { clients } = useClients(id);
   const navigate = useNavigate();
 
-  const handleSubmit = (clientInfo) => {
-    return async (e) => {
-      e.preventDefault();
-      await clientService.updateClient(id, clientInfo);
-      navigate('/clientes');
-    };
+  const handleSubmit = async (client) => {
+    await clientService.updateClient(id, client);
+    navigate('/clientes');
   };
 
   return (

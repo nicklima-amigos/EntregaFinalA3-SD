@@ -6,12 +6,9 @@ import { useNavigate } from 'react-router-dom';
 export function CreateClient() {
   const navigate = useNavigate();
 
-  const handleSubmit = (client) => {
-    return async (e) => {
-      e.preventDefault();
-      await clientService.createClient(client);
-      navigate('/clientes');
-    };
+  const handleSubmit = async (client) => {
+    await clientService.createClient(client);
+    navigate('/clientes');
   };
 
   return (
