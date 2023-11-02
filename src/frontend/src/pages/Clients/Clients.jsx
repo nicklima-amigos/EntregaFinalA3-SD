@@ -4,9 +4,17 @@ import { grey } from '@mui/material/colors';
 import { SingleClient } from '../../components/clients/SingleClient/SingleClient';
 import { useClients } from '../../hooks/useClients';
 import { Link } from 'react-router-dom';
+import { clientService } from '../../service/clients';
 
 export function Clients() {
-  const { clients } = useClients();
+  const { clients, setClients } = useClients();
+
+  const handleDelete = (clientId) => {
+    return async () => {
+      await clientService.deleteClient(clientId);
+      setClients(clients.filter((client) => client.id !== clientId));
+    };
+  };
 
   return (
     <Container sx={{ maxWidth: 1000, textAlign: 'center' }}>
@@ -44,7 +52,13 @@ export function Clients() {
           <Grid2 xs={2}></Grid2>
         </Grid2>
         {clients.map((client, index) => {
-          return <SingleClient key={index} client={client} />;
+          return (
+            <SingleClient
+              key={index}
+              client={client}
+              handleDelete={handleDelete(client.id)}
+            />
+          );
         })}
       </Grid2>
     </Container>

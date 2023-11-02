@@ -3,7 +3,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-export function SingleClient({ client }) {
+export function SingleClient({ client, handleDelete }) {
   const { id, name, created_at } = client;
   const createdAt = format(new Date(created_at), 'dd/MM/yyyy');
   return (
@@ -47,7 +47,9 @@ export function SingleClient({ client }) {
         }}
         xs={2}
       >
-        <Button color='error'>Excluir</Button>
+        <Button color='error' onClick={handleDelete}>
+          Excluir
+        </Button>
       </Grid2>
     </Grid2>
   );

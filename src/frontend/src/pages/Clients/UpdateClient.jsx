@@ -1,16 +1,19 @@
 import { Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ClientForm } from '../../components/forms/Client';
 import { useClients } from '../../hooks/useClients';
+import { clientService } from '../../service/clients';
 
 export function UpdateClient() {
   const { id } = useParams();
-  const { clients, updateClient } = useClients(id);
+  const { clients } = useClients(id);
+  const navigate = useNavigate();
 
   const handleSubmit = (clientInfo) => {
-    return (e) => {
+    return async (e) => {
       e.preventDefault();
-      updateClient(id, clientInfo);
+      await clientService.updateClient(id, clientInfo);
+      navigate('/clientes');
     };
   };
 

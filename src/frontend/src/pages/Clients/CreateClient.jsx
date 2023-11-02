@@ -1,16 +1,19 @@
 import { Typography } from '@mui/material';
 import { ClientForm } from '../../components/forms/Client';
-import { useClients } from '../../hooks/useClients';
+import { clientService } from '../../service/clients';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateClient() {
-  const { createClient } = useClients();
+  const navigate = useNavigate();
 
   const handleSubmit = (client) => {
-    return (e) => {
+    return async (e) => {
       e.preventDefault();
-      createClient(client);
+      await clientService.createClient(client);
+      navigate('/clientes');
     };
   };
+
   return (
     <>
       <Typography
