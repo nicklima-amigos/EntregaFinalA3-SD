@@ -22,7 +22,7 @@ class SalesRepository:
             """
             SELECT 
                 s.id, s.quantity,
-                p.id, p.name, p.price,
+                p.id, p.name, p.price, p.brand,
                 c.id, c.name, c.created_at
             FROM 
                 sales s
@@ -42,14 +42,14 @@ class SalesRepository:
             sale_quantity,
             product_id,
             product_name,
-            product_brand,
             product_price,
+            product_brand,
             client_id,
             client_name,
             client_created_at,
         ) = row
         product = ProductInformation(
-            id=product_id, name=product_name,brand = product_brand, price=product_price
+            id=product_id, name=product_name, brand=product_brand, price=product_price
         )
         client = Client(id=client_id, name=client_name, created_at=client_created_at)
         return SaleDetails(
