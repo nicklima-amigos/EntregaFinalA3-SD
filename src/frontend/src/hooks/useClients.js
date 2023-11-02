@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
-import { API_URL } from '../constants';
+import { clientService } from '../service/clients';
 
 export function useClients(clientId) {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
     const getClients = async () => {
-      const response = await fetch(`${API_URL}/clients`);
-      const data = await response.json();
+      const data = await clientService.getClients();
       setClients(data);
     };
 
     const getSingleClient = async () => {
-      const response = await fetch(`${API_URL}/clients/${clientId}`);
-      const data = await response.json();
+      const data = await clientService.getSingleClient(clientId);
       setClients([data]);
     };
     if (!clientId) {
