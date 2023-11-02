@@ -1,4 +1,4 @@
-init_values = """
+fixtures = """
     INSERT INTO clients (id,name) VALUES 
     (1,"Joao Luccas"),
     (2,"Rafael Oliveira"),
