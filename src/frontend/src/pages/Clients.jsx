@@ -1,23 +1,11 @@
 import { Button, Container } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { grey } from '@mui/material/colors';
-import { useEffect, useState } from 'react';
 import { SingleClient } from '../components/clients/SingleClient/SingleClient';
+import { useClients } from '../components/hooks/useClients';
 
 export function Clients() {
-  const [clients, setClients] = useState([]);
-
-  const tableColumnWidths = ['30%', '30%', '20%', '20%'];
-
-  useEffect(() => {
-    const fetchClients = async () => {
-      const response = await fetch('http://localhost:8000/clients');
-      const data = await response.json();
-      setClients(data);
-    };
-
-    fetchClients();
-  }, []);
+  const { clients } = useClients();
 
   return (
     <Container sx={{ maxWidth: 1000, textAlign: 'center' }}>
@@ -53,13 +41,7 @@ export function Clients() {
           <Grid2 xs={2}></Grid2>
         </Grid2>
         {clients.map((client, index) => {
-          return (
-            <SingleClient
-              key={index}
-              client={client}
-              tableColumnWidths={tableColumnWidths}
-            />
-          );
+          return <SingleClient key={index} client={client} />;
         })}
       </Grid2>
     </Container>
