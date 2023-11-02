@@ -25,7 +25,7 @@ class SalesService:
         if product is None:
             raise HTTPException(status_code=404, detail="Product not found")
         if product.quantity < sale.quantity:
-            raise HTTPException(status_code=422, detail="Not enough product in stock")
+            raise HTTPException(status_code=422, detail="Not enough product in storage")
         product.quantity -= sale.quantity
         self.products_repository.update_quantity(product.id, product.quantity)
         return self.repository.create(sale)

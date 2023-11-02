@@ -1,23 +1,24 @@
 import sqlite3
 from .schema import schema
-from .fixtures import init_values
+from .fixtures import fixtures
 
 
 def init_db():
     with sqlite3.connect("database.sqlite3") as connection:
         connection.executescript(schema)
 
-def init_values_db():
+
+def insert_fixtures():
     with sqlite3.connect("database.sqlite3") as connection:
         cursor = connection.cursor()
         try:
-            cursor.executescript(init_values)
+            cursor.executescript(fixtures)
             connection.commit()
         except sqlite3.IntegrityError as e:
             print("Erro de unicidade", e)
         finally:
             cursor.close()
-        
+
 
 class Database:
     def __init__(self, database_name: str = "database.sqlite3"):
