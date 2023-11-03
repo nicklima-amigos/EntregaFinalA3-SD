@@ -7,7 +7,9 @@ class ProductsRepository:
         self.database = database
 
     def find_all(self):
-        rows = self.database.query("SELECT id, name, brand, price, quantity FROM products")
+        rows = self.database.query(
+            "SELECT id, name, brand, price, quantity FROM products"
+        )
         return [
             Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
             for (id, name, brand, price, quantity) in rows
