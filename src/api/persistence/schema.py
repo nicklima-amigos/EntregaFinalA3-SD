@@ -12,7 +12,7 @@ schema = """
         name TEXT NOT NULL,
         brand TEXT NOT NULL,
         price REAL NOT NULL,
-        quantity INTEGER NOT NULL
+        quantity INTEGER NOT NULL DEFAULT 0
     );
     
     CREATE TABLE IF NOT EXISTS sales (
