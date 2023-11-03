@@ -12,7 +12,7 @@ class CreateProduct(ProductBase):
     name: str
     brand: str
     price: float
-    quantity: int | None = Field(default=0)
+    quantity: int = Field(default=0)
 
 
 class UpdateProduct(ProductBase):
