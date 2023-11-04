@@ -16,9 +16,9 @@ export function useClients(clientId) {
     };
     if (!clientId) {
       getClients();
-    } else {
-      getSingleClient();
+      return;
     }
+    getSingleClient();
   }, [clientId]);
 
   return {
