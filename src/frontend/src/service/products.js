@@ -1,12 +1,12 @@
 import { API_URL } from '../constants';
 
-const createClient = async (client) => {
-  const response = await fetch(`${API_URL}/clients`, {
+const createProduct = async (product) => {
+  const response = await fetch(`${API_URL}/products`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(client),
+    body: JSON.stringify(product),
   });
   if (!response.ok) {
     throw new Error('Something went wrong');
@@ -14,13 +14,13 @@ const createClient = async (client) => {
   return response.json();
 };
 
-const updateClient = async (id, client) => {
-  const response = await fetch(`${API_URL}/clients/${id}`, {
+const updateProduct = async (id, product) => {
+  const response = await fetch(`${API_URL}/products/${id}`, {
     method: 'PUT',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(client),
+    body: JSON.stringify(product),
   });
   if (!response.ok) {
     throw new Error('Something went wrong');
@@ -28,8 +28,8 @@ const updateClient = async (id, client) => {
   return response.json();
 };
 
-const deleteClient = async (clientId) => {
-  const response = await fetch(`${API_URL}/clients/${clientId}`, {
+const deleteProduct = async (productId) => {
+  const response = await fetch(`${API_URL}/products/${productId}`, {
     method: 'DELETE',
   });
   if (!response.ok) {
@@ -37,26 +37,26 @@ const deleteClient = async (clientId) => {
   }
 };
 
-const getClients = async () => {
-  const response = await fetch(`${API_URL}/clients`);
+const getProducts = async () => {
+  const response = await fetch(`${API_URL}/products`);
   if (!response.ok) {
     throw new Error('Something went wrong');
   }
   return response.json();
 };
 
-const getSingleClient = async (clientId) => {
-  const response = await fetch(`${API_URL}/clients/${clientId}`);
+const getSingleProduct = async (productId) => {
+  const response = await fetch(`${API_URL}/products/${productId}`);
   if (!response.ok) {
     throw new Error('Something went wrong');
   }
   return response.json();
 };
 
-export const clientService = {
-  createClient,
-  updateClient,
-  deleteClient,
-  getClients,
-  getSingleClient,
+export const productService = {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getProducts,
+  getSingleProduct,
 };
