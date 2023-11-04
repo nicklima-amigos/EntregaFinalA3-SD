@@ -11,7 +11,7 @@ export function useProducts(productId) {
         };
 
         const getSingleProduct = async () => {
-            const data = await productService.getSingleClient(productId);
+            const data = await productService.getSingleProduct(productId);
             setProducts([data]);
         };
         if (!productId) {
