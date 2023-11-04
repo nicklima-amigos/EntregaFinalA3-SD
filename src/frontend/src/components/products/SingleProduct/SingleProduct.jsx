@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Button } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { Link } from 'react-router-dom';
@@ -70,3 +71,8 @@ export function SingleProduct({ product, handleDelete }) {
         </Grid2>
     );
 }
+=======
+export function SingleProduct() {
+    return
+}
+>>>>>>> f13a66a (feat: new implementation product in react)
