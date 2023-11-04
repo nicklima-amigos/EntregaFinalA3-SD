@@ -5,6 +5,7 @@ import { Clients } from '../pages/Clients/Clients';
 import { CreateClient } from '../pages/Clients/CreateClient';
 import { UpdateClient } from '../pages/Clients/UpdateClient';
 import { Home } from '../pages/Home';
+import { Products } from '../pages/Products/Products';
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'produtos',
-        element: <h1>Produtos</h1>,
+        element: <Products />,
       },
       {
         path: 'vendas',
