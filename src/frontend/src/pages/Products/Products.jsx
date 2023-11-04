@@ -12,7 +12,7 @@ export function Products() {
 
   const handleDelete = (productId) => {
     return async () => {
-      await productService.deleteClient(productId);
+      await productService.deleteProduct(productId);
       setProducts(products.filter((product) => product.id !== productId));
     };
   };
@@ -56,7 +56,7 @@ export function Products() {
           return (
             <SingleProduct
               key={index}
-              client={products}
+              product={products}
               handleDelete={handleDelete(product.id)}
             />
           );
