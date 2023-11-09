@@ -21,7 +21,7 @@ export function SingleProduct({ product, handleDelete }) {
                     textAlign: 'center',
                     marginTop: 1,
                 }}
-                xs={4}
+                xs={2}
             >
                 {name}
             </Grid2>
@@ -30,7 +30,7 @@ export function SingleProduct({ product, handleDelete }) {
                     borderBottom: 'solid 1px black',
                     marginTop: 1,
                 }}
-                xs={4}
+                xs={2}
             >
                 {brand}
             </Grid2>
@@ -39,7 +39,7 @@ export function SingleProduct({ product, handleDelete }) {
                     borderBottom: 'solid 1px black',
                     marginTop: 1,
                 }}
-                xs={4}
+                xs={2}
             >
                 {price}
             </Grid2>
@@ -48,7 +48,7 @@ export function SingleProduct({ product, handleDelete }) {
                     borderBottom: 'solid 1px black',
                     marginTop: 1,
                 }}
-                xs={4}
+                xs={2}
             >
                 {quantity}
             </Grid2>
