@@ -1,14 +1,17 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Navbar } from '../components/Navbar/Navbar';
-import { Root } from '../components/Root/Root';
-import { Clients } from '../pages/Clients/Clients';
-import { CreateClient } from '../pages/Clients/CreateClient';
-import { UpdateClient } from '../pages/Clients/UpdateClient';
-import { Home } from '../pages/Home';
+import { createBrowserRouter } from "react-router-dom";
+import { Navbar } from "../components/Navbar/Navbar";
+import { Root } from "../components/Root/Root";
+import { Clients } from "../pages/Clients/Clients";
+import { CreateClient } from "../pages/Clients/CreateClient";
+import { UpdateClient } from "../pages/Clients/UpdateClient";
+import { Home } from "../pages/Home";
+import { Products } from "../pages/Products/Products";
+import { UpdateProduct } from "../pages/Products/UpdateProduct";
+import { CreateProduct } from "../pages/Products/CreateProduct";
 
 export const router = createBrowserRouter([
   {
-    path: '',
+    path: "",
     element: <Root />,
     errorElement: (
       <>
@@ -18,27 +21,35 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '',
+        path: "",
         element: <Home />,
       },
       {
-        path: 'clientes',
+        path: "clientes",
         element: <Clients />,
       },
       {
-        path: 'clientes/cadastrar',
+        path: "clientes/cadastrar",
         element: <CreateClient />,
       },
       {
-        path: 'clientes/atualizar/:id',
+        path: "clientes/atualizar/:id",
         element: <UpdateClient />,
       },
       {
-        path: 'produtos',
-        element: <h1>Produtos</h1>,
+        path: "produtos",
+        element: <Products />,
       },
       {
-        path: 'vendas',
+        path: "produtos/cadastrar",
+        element: <CreateProduct />,
+      },
+      {
+        path: "produtos/atualizar/:id",
+        element: <UpdateProduct />,
+      },
+      {
+        path: "vendas",
         element: <h1>Vendas</h1>,
       },
     ],
