@@ -7,10 +7,11 @@
 <h3>É necessário ter o Python, pip e o node instalado.</h3>
 
 [Download do Python](https://www.python.org/downloads/)
-<br>
+`<br>`
 [Download do Node](https://nodejs.org/en)
 
 Para instalar o pip:
+
 ```bash
 python -m pip install --upgrade pip
 ```
@@ -21,7 +22,7 @@ python -m pip install --upgrade pip
 git clone https://github.com/nicklima-amigos/EntregaFinalA3-SD.git
 ```
 
-<h4>2. Criar ambiente virtual do Python (opcional):</h4>
+<h4>2. Criar ambiente virtual do Python:</h4>
 
 Linux:
 
