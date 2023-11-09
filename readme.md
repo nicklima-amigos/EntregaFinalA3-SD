@@ -7,7 +7,9 @@
 <h3>É necessário ter o Python, pip e o node instalado.</h3>
 
 [Download do Python](https://www.python.org/downloads/)
-[Download do Node](https://nodejs.org/en)
+
+[
+](https://www.python.org/downloads/)[Download do Node](https://nodejs.org/en)
 
 Para instalar o pip:
 
