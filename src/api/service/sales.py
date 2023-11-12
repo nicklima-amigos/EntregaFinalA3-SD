@@ -34,3 +34,6 @@ class SalesService:
     def delete(self, id: int):
         self.find_one(id)
         return self.repository.delete(id)
+    
+    def list_info(self):
+        return self.repository.list_info()

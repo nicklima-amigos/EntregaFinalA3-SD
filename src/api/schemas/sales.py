@@ -17,3 +17,9 @@ class UpdateSale(SaleBase):
 
 class Sale(SaleBase):
     id: int
+
+class SaleInfo(Sale):
+    product_name: str
+    product_unit_price: float
+    client_name: str
+    total: float

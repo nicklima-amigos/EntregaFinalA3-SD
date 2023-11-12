@@ -1,7 +1,7 @@
 from schemas.clients import Client, SaleDetails
 from schemas.products import ProductInformation
 from persistence.database import Database
-from schemas.sales import CreateSale, Sale, UpdateSale
+from schemas.sales import CreateSale, Sale, UpdateSale, SaleInfo
 
 
 class SalesRepository:
@@ -77,3 +77,32 @@ class SalesRepository:
 
     def delete(self, id: int):
         return self.database.exec("DELETE FROM sales WHERE id = ?", [id])
+    
+    def list_info(self):
+        rows = self.database.query(
+            """
+            SELECT 
+                s.id, s.quantity,
+                p.id, p.name, p.price,
+                c.id, c.name
+            FROM 
+                sales s
+            JOIN
+                products p ON p.id = s.product_id
+            JOIN
+                clients c ON c.id = s.client_id
+        """
+        )
+        return [
+            SaleInfo(
+                id=id,
+                product_id=product_id,
+                product_name=product_name,
+                product_unit_price=product_unit_price,
+                client_id=client_id,
+                client_name=client_name,
+                quantity=quantity,
+                total=round(product_unit_price * quantity, 2),
+            )
+            for (id, quantity, product_id, product_name, product_unit_price, client_id, client_name) in rows
+        ]

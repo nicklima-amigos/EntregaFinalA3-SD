@@ -1,12 +1,12 @@
 import { API_URL } from "../constants";
 
-const createProduct = async (product) => {
-  const response = await fetch(`${API_URL}/products`, {
+const createSale = async (sale) => {
+  const response = await fetch(`${API_URL}/sales`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(product),
+    body: JSON.stringify(sale),
   });
   if (!response.ok) {
     throw new Error("Something went wrong");
@@ -14,13 +14,13 @@ const createProduct = async (product) => {
   return response.json();
 };
 
-const updateProduct = async (id, product) => {
-  const response = await fetch(`${API_URL}/products/${id}`, {
+const updateSale = async (id, sale) => {
+  const response = await fetch(`${API_URL}/sales/${id}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(product),
+    body: JSON.stringify(sale),
   });
   if (!response.ok) {
     throw new Error("Something went wrong");
@@ -28,8 +28,8 @@ const updateProduct = async (id, product) => {
   return response.json();
 };
 
-const deleteProduct = async (productId) => {
-  const response = await fetch(`${API_URL}/products/${productId}`, {
+const deleteSale = async (saleId) => {
+  const response = await fetch(`${API_URL}/sales/${saleId}`, {
     method: "DELETE",
   });
   if (!response.ok) {
@@ -37,26 +37,26 @@ const deleteProduct = async (productId) => {
   }
 };
 
-const getProducts = async () => {
-  const response = await fetch(`${API_URL}/products`);
+const getSales = async () => {
+  const response = await fetch(`${API_URL}/sales`);
   if (!response.ok) {
     throw new Error("Something went wrong");
   }
   return response.json();
 };
 
-const getSingleProduct = async (productId) => {
-  const response = await fetch(`${API_URL}/products/${productId}`);
+const getSingleSale = async (saleId) => {
+  const response = await fetch(`${API_URL}/sales/${saleId}`);
   if (!response.ok) {
     throw new Error("Something went wrong");
   }
   return response.json();
 };
 
-export const productService = {
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  getProducts,
-  getSingleProduct,
+export const saleService = {
+  createSale,
+  updateSale,
+  deleteSale,
+  getSales,
+  getSingleSale,
 };
