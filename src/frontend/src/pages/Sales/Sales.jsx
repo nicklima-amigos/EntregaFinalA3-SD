@@ -18,7 +18,7 @@ export function Sales() {
 
   return (
     <Container sx={{ maxWidth: 1000, textAlign: "center" }}>
-      <Link to="/sales/cadastrar">
+      <Link to="/vendas/cadastrar">
         <Button sx={{ margin: 2 }}>Cadastrar Venda</Button>
       </Link>
 

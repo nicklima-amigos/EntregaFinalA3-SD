@@ -46,7 +46,7 @@ export function SingleSale({ sale, handleDelete }) {
         {quantity}
       </Grid2>
       <Grid2 sx={{ borderBottom: "solid 1px black" }} xs={2}>
-        <Link to={`/sales/atualizar/${id}`}>
+        <Link to={`/vendas/atualizar/${id}`}>
           <Button sx={{ margin: "auto" }}>Editar</Button>
         </Link>
       </Grid2>
