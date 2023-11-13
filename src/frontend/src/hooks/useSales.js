@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { saleService } from "../service/sales";
+import { useEffect, useState } from 'react';
+import { saleService } from '../service/sales';
 
-export function useSales(saleId) {
+export function useSales(saleId, detail = false) {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -10,17 +10,27 @@ export function useSales(saleId) {
       setSales(data);
     };
 
+    const getSalesInfo = async () => {
+      const data = await saleService.getSalesInfo();
+      setSales(data);
+    };
+
     const getSingleSale = async () => {
       const data = await saleService.getSingleSale(saleId);
       setSales([data]);
     };
+
     if (!saleId) {
+      if (detail) {
+        getSalesInfo();
+        return;
+      }
       getSales();
       return;
     }
 
     getSingleSale();
-  }, [saleId]);
+  }, [saleId, detail]);
 
   return {
     sales,

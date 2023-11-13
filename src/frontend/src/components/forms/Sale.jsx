@@ -1,9 +1,9 @@
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { TextField, Button } from '@mui/material';
+import { useState } from 'react';
 
 export function SaleForm({ sale, handleSubmit }) {
-  const [quantity, setQuantity] = useState(sale?.quantity || "");
+  const [quantity, setQuantity] = useState(sale?.quantity || '');
   const [quantityIsValid, setQuantityIsValid] = useState(true);
 
   const formIsValid = () => {
@@ -16,7 +16,7 @@ export function SaleForm({ sale, handleSubmit }) {
 
   return (
     <form
-      action=""
+      action=''
       onSubmit={async (e) => {
         e.preventDefault();
         if (formIsValid()) {
@@ -24,20 +24,20 @@ export function SaleForm({ sale, handleSubmit }) {
         }
       }}
     >
-      <Grid2 xs={12} sx={{ textAlign: "center" }}>
+      <Grid2 xs={12} sx={{ textAlign: 'center' }}>
         <TextField
-          quantity="quantity"
+          quantity='quantity'
           value={quantity}
           onChange={(e) => {
             setQuantity(e.target.value);
           }}
-          label="Quantidade"
+          label='Quantidade'
           error={!quantityIsValid}
-          helperText={quantityIsValid ? "" : "Quantidade deve ser negativo"}
+          helperText={quantityIsValid ? '' : 'Quantidade não pode ser negativo'}
         />
       </Grid2>
-      <Grid2 xs={12} sx={{ textAlign: "center" }}>
-        <Button type="submit">Salvar</Button>
+      <Grid2 xs={12} sx={{ textAlign: 'center' }}>
+        <Button type='submit'>Salvar</Button>
       </Grid2>
     </form>
   );

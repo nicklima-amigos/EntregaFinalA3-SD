@@ -77,7 +77,7 @@ class SalesRepository:
 
     def delete(self, id: int):
         return self.database.exec("DELETE FROM sales WHERE id = ?", [id])
-    
+
     def list_info(self):
         rows = self.database.query(
             """
@@ -96,13 +96,21 @@ class SalesRepository:
         return [
             SaleInfo(
                 id=id,
+                quantity=quantity,
                 product_id=product_id,
                 product_name=product_name,
                 product_unit_price=product_unit_price,
                 client_id=client_id,
                 client_name=client_name,
-                quantity=quantity,
                 total=round(product_unit_price * quantity, 2),
             )
-            for (id, quantity, product_id, product_name, product_unit_price, client_id, client_name) in rows
+            for (
+                id,
+                quantity,
+                product_id,
+                product_name,
+                product_unit_price,
+                client_id,
+                client_name,
+            ) in rows
         ]
