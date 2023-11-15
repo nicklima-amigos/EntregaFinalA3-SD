@@ -1,4 +1,6 @@
 schema = """
+    PRAGMA foreign_keys = ON;
+
     CREATE TABLE IF NOT EXISTS clients (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
@@ -8,8 +10,9 @@ schema = """
     CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
+        brand TEXT NOT NULL,
         price REAL NOT NULL,
-        quantity INTEGER NOT NULL
+        quantity INTEGER NOT NULL DEFAULT 0
     );
     
     CREATE TABLE IF NOT EXISTS sales (

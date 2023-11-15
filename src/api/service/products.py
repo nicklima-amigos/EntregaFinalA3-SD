@@ -20,6 +20,8 @@ class ProductsService:
         return self.repository.create(product)
 
     def update(self, id: int, product: UpdateProduct):
+        if product.quantity < 0:
+            raise HTTPException(status_code=422, detail="Not enough product in storage")
         updated_product = self.repository.update(id, product)
         if updated_product is None:
             raise HTTPException(status_code=404, detail="Product not found")

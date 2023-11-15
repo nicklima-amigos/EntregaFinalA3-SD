@@ -19,7 +19,7 @@ class ClientsRepository:
         rows = self.database.query(
             """
             SELECT 
-                c.id, c.name, c.created_at, s.id, s.quantity, p.id, p.name, p.price
+                c.id, c.name, c.created_at, s.id, s.quantity, p.id, p.name, p.price, p.brand
             FROM 
                 clients c
             LEFT JOIN 
@@ -37,7 +37,9 @@ class ClientsRepository:
             SaleWithProduct(
                 id=row[3],
                 quantity=row[4],
-                product=ProductInformation(id=row[5], name=row[6], price=row[7]),
+                product=ProductInformation(
+                    id=row[5], brand=row[8], name=row[6], price=row[7]
+                ),
             )
             for row in rows
             if row[3] is not None

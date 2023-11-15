@@ -1,14 +1,18 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ProductBase(BaseModel):
     name: str
+    brand: str
     price: float
     quantity: int
 
 
 class CreateProduct(ProductBase):
-    pass
+    name: str
+    brand: str
+    price: float
+    quantity: int = Field(default=0)
 
 
 class UpdateProduct(ProductBase):
@@ -22,4 +26,5 @@ class Product(ProductBase):
 class ProductInformation(BaseModel):
     id: int
     name: str
+    brand: str
     price: float

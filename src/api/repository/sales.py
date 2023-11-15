@@ -1,7 +1,7 @@
 from schemas.clients import Client, SaleDetails
 from schemas.products import ProductInformation
 from persistence.database import Database
-from schemas.sales import CreateSale, Sale, UpdateSale
+from schemas.sales import CreateSale, Sale, UpdateSale, SaleInfo
 
 
 class SalesRepository:
@@ -22,7 +22,7 @@ class SalesRepository:
             """
             SELECT 
                 s.id, s.quantity,
-                p.id, p.name, p.price,
+                p.id, p.name, p.price, p.brand,
                 c.id, c.name, c.created_at
             FROM 
                 sales s
@@ -43,12 +43,13 @@ class SalesRepository:
             product_id,
             product_name,
             product_price,
+            product_brand,
             client_id,
             client_name,
             client_created_at,
         ) = row
         product = ProductInformation(
-            id=product_id, name=product_name, price=product_price
+            id=product_id, name=product_name, brand=product_brand, price=product_price
         )
         client = Client(id=client_id, name=client_name, created_at=client_created_at)
         return SaleDetails(
@@ -76,3 +77,40 @@ class SalesRepository:
 
     def delete(self, id: int):
         return self.database.exec("DELETE FROM sales WHERE id = ?", [id])
+
+    def list_info(self):
+        rows = self.database.query(
+            """
+            SELECT 
+                s.id, s.quantity,
+                p.id, p.name, p.price,
+                c.id, c.name
+            FROM 
+                sales s
+            JOIN
+                products p ON p.id = s.product_id
+            JOIN
+                clients c ON c.id = s.client_id
+        """
+        )
+        return [
+            SaleInfo(
+                id=id,
+                quantity=quantity,
+                product_id=product_id,
+                product_name=product_name,
+                product_unit_price=product_unit_price,
+                client_id=client_id,
+                client_name=client_name,
+                total=round(product_unit_price * quantity, 2),
+            )
+            for (
+                id,
+                quantity,
+                product_id,
+                product_name,
+                product_unit_price,
+                client_id,
+                client_name,
+            ) in rows
+        ]

@@ -1,15 +1,14 @@
 from fastapi import HTTPException
-from repository.products import ProductsRepository
+from schemas.products import UpdateProduct
+from service.products import ProductsService
 from repository.sales import SalesRepository
 from schemas.sales import CreateSale, UpdateSale
 
 
 class SalesService:
-    def __init__(
-        self, repository: SalesRepository, products_repository: ProductsRepository
-    ):
+    def __init__(self, repository: SalesRepository, products_service: ProductsService):
         self.repository = repository
-        self.products_repository = products_repository
+        self.products_service = products_service
 
     def find_all(self):
         return self.repository.find_all()
@@ -21,13 +20,9 @@ class SalesService:
         return sale
 
     def create(self, sale: CreateSale):
-        product = self.products_repository.find_one(sale.product_id)
-        if product is None:
-            raise HTTPException(status_code=404, detail="Product not found")
-        if product.quantity < sale.quantity:
-            raise HTTPException(status_code=422, detail="Not enough product in stock")
+        product = self.products_service.find_one(sale.product_id)
         product.quantity -= sale.quantity
-        self.products_repository.update_quantity(product.id, product.quantity)
+        self.products_service.update(product.id, UpdateProduct(**product.model_dump()))
         return self.repository.create(sale)
 
     def update(self, id: int, sale: UpdateSale):
@@ -39,3 +34,6 @@ class SalesService:
     def delete(self, id: int):
         self.find_one(id)
         return self.repository.delete(id)
+    
+    def list_info(self):
+        return self.repository.list_info()
