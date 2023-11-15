@@ -8,6 +8,9 @@ import { Home } from "../pages/Home";
 import { Products } from "../pages/Products/Products";
 import { UpdateProduct } from "../pages/Products/UpdateProduct";
 import { CreateProduct } from "../pages/Products/CreateProduct";
+import { Sales } from "../pages/Sales/Sales";
+import { CreateSale } from "../pages/Sales/CreateSale";
+import { UpdateSale } from "../pages/Sales/UpdateSale";
 
 export const router = createBrowserRouter([
   {
@@ -50,7 +53,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "vendas",
-        element: <h1>Vendas</h1>,
+        element: <Sales />,
+      },
+      {
+        path: "vendas/cadastrar",
+        element: <CreateSale />,
+      },
+      {
+        path: "vendas/atualizar/:id",
+        element: <UpdateSale />,
       },
     ],
   },

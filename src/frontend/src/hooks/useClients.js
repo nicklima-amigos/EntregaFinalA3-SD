@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { clientService } from '../service/clients';
 
-export function useClients(clientId) {
+export function useClients() {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
@@ -10,16 +10,8 @@ export function useClients(clientId) {
       setClients(data);
     };
 
-    const getSingleClient = async () => {
-      const data = await clientService.getSingleClient(clientId);
-      setClients([data]);
-    };
-    if (!clientId) {
-      getClients();
-      return;
-    }
-    getSingleClient();
-  }, [clientId]);
+    getClients();
+  }, []);
 
   return {
     clients,

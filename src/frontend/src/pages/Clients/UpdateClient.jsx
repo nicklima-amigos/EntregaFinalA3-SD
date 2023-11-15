@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClientForm } from '../../components/forms/Client';
-import { useClients } from '../../hooks/useClients';
+import { useSingleClient } from '../../hooks/useSingleClient';
 import { clientService } from '../../service/clients';
 
 export function UpdateClient() {
   const { id } = useParams();
-  const { clients } = useClients(id);
+  const { client } = useSingleClient(id);
   const navigate = useNavigate();
 
   const handleSubmit = async (client) => {
@@ -16,15 +16,15 @@ export function UpdateClient() {
 
   return (
     <>
-      {clients.length > 0 && (
+      {client.length > 0 && (
         <>
           <Typography
             variant='h3'
             sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
           >
-            Editando informações de {clients[0].name}
+            Editando informações de {client.name}
           </Typography>
-          <ClientForm handleSubmit={handleSubmit} client={clients[0]} />
+          <ClientForm handleSubmit={handleSubmit} client={client} />
         </>
       )}
     </>
