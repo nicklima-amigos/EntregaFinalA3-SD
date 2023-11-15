@@ -1,4 +1,5 @@
 import { API_URL } from '../constants';
+import { handleApiError } from './utils';
 
 const createClient = async (client) => {
   const response = await fetch(`${API_URL}/clients`, {
@@ -9,7 +10,7 @@ const createClient = async (client) => {
     body: JSON.stringify(client),
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -23,7 +24,7 @@ const updateClient = async (id, client) => {
     body: JSON.stringify(client),
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -33,14 +34,14 @@ const deleteClient = async (clientId) => {
     method: 'DELETE',
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
 };
 
 const getClients = async () => {
   const response = await fetch(`${API_URL}/clients`);
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -48,7 +49,7 @@ const getClients = async () => {
 const getSingleClient = async (clientId) => {
   const response = await fetch(`${API_URL}/clients/${clientId}`);
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };

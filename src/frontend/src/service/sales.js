@@ -1,4 +1,5 @@
 import { API_URL } from '../constants';
+import { handleApiError } from './utils';
 
 const createSale = async (sale) => {
   const response = await fetch(`${API_URL}/sales`, {
@@ -9,7 +10,7 @@ const createSale = async (sale) => {
     body: JSON.stringify(sale),
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -23,7 +24,7 @@ const updateSale = async (id, sale) => {
     body: JSON.stringify(sale),
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -33,14 +34,14 @@ const deleteSale = async (saleId) => {
     method: 'DELETE',
   });
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
 };
 
 const getSales = async () => {
   const response = await fetch(`${API_URL}/sales`);
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -48,7 +49,7 @@ const getSales = async () => {
 const getSingleSale = async (saleId) => {
   const response = await fetch(`${API_URL}/sales/${saleId}`);
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
@@ -56,7 +57,7 @@ const getSingleSale = async (saleId) => {
 const getSalesDetails = async () => {
   const response = await fetch(`${API_URL}/sales/details`);
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    return handleApiError(response);
   }
   return response.json();
 };
