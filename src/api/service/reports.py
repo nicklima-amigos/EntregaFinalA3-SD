@@ -30,3 +30,6 @@ class ReportService:
             media_type="application/pdf",
             headers={"Content-Disposition": f"attachment; filename={report_name}.pdf"},
         )
+
+    def render_template(self, template_name: str, context: dict[str, Any]):
+        return self.templates.TemplateResponse(template_name, context)

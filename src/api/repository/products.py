@@ -15,6 +15,15 @@ class ProductsRepository:
             for (id, name, brand, price, quantity) in rows
         ]
 
+    def find_depleting(self):
+        rows = self.database.query(
+            "SELECT id, name, brand, price, quantity FROM products WHERE quantity < 5 ORDER BY quantity ASC"
+        )
+        return [
+            Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
+            for (id, name, brand, price, quantity) in rows
+        ]
+
     def find_one(self, id: int):
         row = self.database.query_one(
             "SELECT id, name, brand, price, quantity FROM products WHERE id = ?", [id]

@@ -30,3 +30,6 @@ class ProductsService:
     def delete(self, id: int):
         self.find_one(id)
         return self.repository.delete(id)
+
+    def find_depleting(self):
+        return self.repository.find_depleting()
