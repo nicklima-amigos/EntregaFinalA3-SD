@@ -9,7 +9,7 @@ from schemas.reports import ReportResponseConfig
 
 
 class ReportService:
-    templates = Jinja2Templates(directory="templates")
+    __templates = Jinja2Templates(directory="templates")
 
     def create_report(
         self,
@@ -17,7 +17,7 @@ class ReportService:
         template_name: str,
         context: dict[str, Any],
     ):
-        content: Template = self.templates.get_template(template_name)
+        content: Template = self.__templates.get_template(template_name)
 
         with open("./static/style.css") as style:
             html_content = content.render(style=style.read(), **context)
@@ -32,4 +32,4 @@ class ReportService:
         )
 
     def render_template(self, template_name: str, context: dict[str, Any]):
-        return self.templates.TemplateResponse(template_name, context)
+        return self.__templates.TemplateResponse(template_name, context)
