@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <style>
-        {{style}}
-    </style>
-</head>
-
-<body>
-    <h1>Produtos com baixo estoque</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>R$ {{ product.price }}</td>
-                <td style="text-align: right">{{ product.quantity }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/style.css">
+        <style>
+            {{style}}
+        </style>
+    </head>
+    <body>
+        <h1>Produtos com baixo estoque</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>R$ {{ product.price }}</td>
+                    <td style="text-align: right">{{ product.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
 </html>

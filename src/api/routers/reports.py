@@ -24,7 +24,6 @@ def find(service: ReportService = Depends(get_reports_service)):
 
 @reports_router.get("/depleting-products")
 def generate_depleting_products_report(
-    request: Request,
     report_service: ReportService = Depends(get_reports_service),
     products_service: ProductsService = Depends(get_products_service),
 ):
@@ -32,7 +31,4 @@ def generate_depleting_products_report(
     file_response_data = report_service.create_report(
         "baixo_estoque", "depleting_products.j2", {"products": depleting_products}
     )
-    # return report_service.render_template(
-    #     "depleting_products.j2", {"products": depleting_products, "request": request}
-    # )
     return StreamingResponse(**file_response_data)
