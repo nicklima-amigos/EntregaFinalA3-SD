@@ -5,6 +5,8 @@ from jinja2 import Template
 from fastapi.templating import Jinja2Templates
 from weasyprint import HTML
 
+from schemas.reports import ReportResponseConfig
+
 
 class ReportService:
     templates = Jinja2Templates(directory="templates")
@@ -23,10 +25,8 @@ class ReportService:
         pdf_file = BytesIO()
         HTML(string=html_content).write_pdf(target=pdf_file)
         pdf_file.seek(0)
-        return {
-            "content": pdf_file,
-            "media_type": "application/pdf",
-            "headers": {
-                "Content-Disposition": f"attachment; filename={report_name}.pdf"
-            },
-        }
+        return ReportResponseConfig(
+            content=pdf_file,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={report_name}.pdf"},
+        )
