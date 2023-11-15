@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { productService } from "../service/products";
+import { useEffect, useState } from 'react';
+import { productService } from '../service/products';
 
-export function useProducts(productId) {
+export function useProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -10,17 +10,8 @@ export function useProducts(productId) {
       setProducts(data);
     };
 
-    const getSingleProduct = async () => {
-      const data = await productService.getSingleProduct(productId);
-      setProducts([data]);
-    };
-    if (!productId) {
-      getProducts();
-      return;
-    }
-
-    getSingleProduct();
-  }, [productId]);
+    getProducts();
+  }, []);
 
   return {
     products,

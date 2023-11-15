@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { saleService } from '../service/sales';
 
-export function useSales(saleId, detail = false) {
+export function useSales(detail = false) {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -15,22 +15,13 @@ export function useSales(saleId, detail = false) {
       setSales(data);
     };
 
-    const getSingleSale = async () => {
-      const data = await saleService.getSingleSale(saleId);
-      setSales([data]);
-    };
-
-    if (!saleId) {
-      if (detail) {
-        getSalesInfo();
-        return;
-      }
-      getSales();
+    if (detail) {
+      getSalesInfo();
       return;
     }
-
-    getSingleSale();
-  }, [saleId, detail]);
+    getSales();
+    return;
+  }, [detail]);
 
   return {
     sales,

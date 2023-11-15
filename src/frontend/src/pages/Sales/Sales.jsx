@@ -1,18 +1,18 @@
 import { Button, Container } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { grey } from '@mui/material/colors';
-import { SingleSale } from '../../components/sales/SingleSale/SingleSale';
-import { useSales } from '../../hooks/useSales';
 import { Link } from 'react-router-dom';
+import { SingleSale } from '../../components/sales/SingleSale/SingleSale';
+import { useSalesDetails } from '../../hooks/useSaleDetails';
 import { saleService } from '../../service/sales';
 
 export function Sales() {
-  const { sales, setSales } = useSales(null, true);
+  const { salesDetails, setSalesDetails } = useSalesDetails();
 
   const handleDelete = (saleId) => {
     return async () => {
       await saleService.deleteSale(saleId);
-      setSales(sales.filter((sale) => sale.id !== saleId));
+      setSalesDetails(salesDetails.filter((sale) => sale.id !== saleId));
     };
   };
 
@@ -54,7 +54,7 @@ export function Sales() {
           <Grid2 xs={1}></Grid2>
           <Grid2 xs={1}></Grid2>
         </Grid2>
-        {sales.map((sale, index) => {
+        {salesDetails.map((sale, index) => {
           return (
             <SingleSale
               key={index}

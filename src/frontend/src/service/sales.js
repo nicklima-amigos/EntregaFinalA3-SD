@@ -53,7 +53,7 @@ const getSingleSale = async (saleId) => {
   return response.json();
 };
 
-const getSalesInfo = async () => {
+const getSalesDetails = async () => {
   const response = await fetch(`${API_URL}/sales/details`);
   if (!response.ok) {
     throw new Error('Something went wrong');
@@ -67,5 +67,5 @@ export const saleService = {
   deleteSale,
   getSales,
   getSingleSale,
-  getSalesInfo,
+  getSalesDetails,
 };
