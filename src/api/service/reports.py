@@ -1,5 +1,4 @@
 from io import BytesIO
-from fastapi.responses import StreamingResponse
 from typing import Any
 
 from jinja2 import Template
@@ -24,8 +23,10 @@ class ReportService:
         pdf_file = BytesIO()
         HTML(string=html_content).write_pdf(target=pdf_file)
         pdf_file.seek(0)
-        return StreamingResponse(
-            pdf_file,
-            media_type="application/pdf",
-            headers={"Content-Disposition": f"attachment; filename={report_name}.pdf"},
-        )
+        return {
+            "content": pdf_file,
+            "media_type": "application/pdf",
+            "headers": {
+                "Content-Disposition": f"attachment; filename={report_name}.pdf"
+            },
+        }
