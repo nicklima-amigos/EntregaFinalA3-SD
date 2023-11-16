@@ -1,11 +1,7 @@
-from itertools import product
 from math import prod
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
-from api.routers import sales
-from api.schemas.clients import Client, ClientDetail, SaleDetails
-from api.schemas.products import Product
 from api.service.sales import SalesService
 from service.clients import ClientsService
 from service.products import ProductsService
