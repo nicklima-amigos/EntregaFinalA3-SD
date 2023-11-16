@@ -2,7 +2,7 @@ from fastapi import Depends
 from service.reports import ReportService
 from repository.products import ProductsRepository
 from repository.sales import SalesRepository
-from service.clients import ClientService
+from service.clients import ClientsService
 from service.products import ProductsService
 from service.sales import SalesService
 from persistence.database import Database
@@ -43,7 +43,7 @@ def get_sales_service(
 def get_clients_service(
     repository: ClientsRepository = Depends(get_clients_repository),
 ):
-    return ClientService(repository)
+    return ClientsService(repository)
 
 
 def get_reports_service():

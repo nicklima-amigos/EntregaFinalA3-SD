@@ -3,7 +3,7 @@ from repository.clients import ClientsRepository
 from schemas.clients import CreateClient, UpdateClient
 
 
-class ClientService:
+class ClientsService:
     def __init__(self, repository: ClientsRepository):
         self.repository = repository
 
