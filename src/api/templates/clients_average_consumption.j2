@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ client.name }}</td>
                     <td>{{ client.number_of_purchases }}</td>
-                    <td>R$ {{ client.average_consumption }}</td>
+                    <td>R$ {{ '%0.2f'|format(client.average_consumption) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
