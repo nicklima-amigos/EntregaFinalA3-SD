@@ -34,12 +34,11 @@ class ClientsService:
         self.find_one(id)
         return self.repository.delete(id)
 
-    def get_clients_purchased_products(self, id: int):
-        client = self.find_one(id)
+    def get_clients_purchased_products(self, client: ClientDetail):
         products_quantities: dict[str, int] = {}
         for sale in client.sales:
             product_name = sale.product.name
-            if sale.product in products_quantities:
+            if product_name in products_quantities:
                 products_quantities[product_name] += sale.quantity
             else:
                 products_quantities[product_name] = sale.quantity

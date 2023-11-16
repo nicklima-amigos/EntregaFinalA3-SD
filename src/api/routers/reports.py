@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
-from api.service.sales import SalesService
+from service.sales import SalesService
 from service.clients import ClientsService
 from service.products import ProductsService
 from dependencies import (
@@ -37,7 +37,7 @@ def generate_products_by_client_report(
     report_service: ReportService = Depends(get_reports_service),
 ):
     client = clients_service.find_one(client_id)
-    products = clients_service.get_clients_purchased_products(client_id)
+    products = clients_service.get_clients_purchased_products(client)
     file_response_data = report_service.create_report(
         "produtos_por_cliente",
         "products_by_client.j2",
@@ -61,7 +61,7 @@ def generate_best_sellers_report(
     return StreamingResponse(**file_response_data)
 
 
-@reports_router.get("clients-average-consumption")
+@reports_router.get("/clients-average-consumption")
 def generate_clients_average_consumption_report(
     report_service: ReportService = Depends(get_reports_service),
     clients_service: ClientsService = Depends(get_clients_service),

@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/style.css">
+        <style>
+            {{style}}
+        </style>
+    </head>
+    <body>
+        <h1>Produtos por cliente</h1>
+
+        <h3>Cliente: {{ client.name }}</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade Comprada</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product[0] }}</td>
+                    <td>{{ product[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
