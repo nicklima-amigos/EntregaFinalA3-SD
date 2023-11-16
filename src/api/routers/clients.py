@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from dependencies import get_clients_service
-from schemas.clients import Client, ClientDetail, CreateClient, UpdateClient
+from schemas import Client, ClientDetail, CreateClient, UpdateClient
 
-from service.clients import ClientsService
+from service import ClientsService
 
 
 clients_router = APIRouter(prefix="/clients", tags=["clients"])

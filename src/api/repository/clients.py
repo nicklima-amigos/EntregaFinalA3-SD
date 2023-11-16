@@ -1,7 +1,12 @@
-from schemas.products import ProductInformation
-from schemas.clients import ClientDetail, SaleWithProduct
-from persistence.database import Database
-from schemas.clients import Client, CreateClient, UpdateClient
+from schemas import (
+    ClientDetail,
+    SaleWithProduct,
+    ProductInformation,
+    Client,
+    CreateClient,
+    UpdateClient,
+)
+from persistence import Database
 
 
 class ClientsRepository:

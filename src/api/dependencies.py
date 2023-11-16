@@ -1,12 +1,8 @@
 from fastapi import Depends
 from service.reports import ReportService
-from repository.products import ProductsRepository
-from repository.sales import SalesRepository
-from service.clients import ClientsService
-from service.products import ProductsService
-from service.sales import SalesService
-from persistence.database import Database
-from repository.clients import ClientsRepository
+from repository import ProductsRepository, SalesRepository, ClientsRepository
+from service import ClientsService, ProductsService, SalesService
+from persistence import Database
 
 DATABASE_URL = "database.sqlite3"
 

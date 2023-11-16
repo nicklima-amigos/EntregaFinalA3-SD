@@ -1,5 +1,5 @@
-from persistence.database import Database
-from schemas.products import CreateProduct, Product, UpdateProduct
+from persistence import Database
+from schemas import CreateProduct, Product, UpdateProduct
 
 
 class ProductsRepository:

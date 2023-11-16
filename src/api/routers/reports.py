@@ -1,9 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
-from service.sales import SalesService
-from service.clients import ClientsService
-from service.products import ProductsService
+from service import SalesService, ClientsService, ProductsService
 from dependencies import (
     get_clients_service,
     get_products_service,

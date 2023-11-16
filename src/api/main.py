@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from routers import reports_router, sales_router, clients_router, products_router
-from persistence.database import init_db, insert_fixtures
+from persistence import init_db, insert_fixtures
 import uvicorn
 
 

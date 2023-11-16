@@ -5,7 +5,7 @@ from jinja2 import Template
 from fastapi.templating import Jinja2Templates
 from weasyprint import HTML
 
-from schemas.reports import ReportResponseConfig
+from schemas import ReportResponseConfig
 
 
 class ReportService:

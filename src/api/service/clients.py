@@ -1,6 +1,6 @@
 from fastapi import HTTPException
-from repository.clients import ClientsRepository
-from schemas.clients import (
+from repository import ClientsRepository
+from schemas import (
     ClientAverageConsumption,
     ClientDetail,
     CreateClient,

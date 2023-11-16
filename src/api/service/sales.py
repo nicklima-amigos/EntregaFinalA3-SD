@@ -1,8 +1,7 @@
 from fastapi import HTTPException
-from schemas.products import UpdateProduct
-from service.products import ProductsService
-from repository.sales import SalesRepository
-from schemas.sales import CreateSale, UpdateSale
+from schemas import UpdateProduct, CreateSale, UpdateSale
+from service import ProductsService
+from repository import SalesRepository
 
 
 class SalesService:

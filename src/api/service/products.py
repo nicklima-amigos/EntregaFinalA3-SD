@@ -1,6 +1,6 @@
 from fastapi import HTTPException
-from repository.products import ProductsRepository
-from schemas.products import CreateProduct, UpdateProduct
+from repository import ProductsRepository
+from schemas import CreateProduct, UpdateProduct
 
 
 class ProductsService:
