@@ -38,3 +38,10 @@ class SaleDetails(BaseModel):
     product: ProductInformation
     client: Client
     quantity: int
+
+
+class ClientAverageConsumption(BaseModel):
+    id: int
+    name: str
+    number_of_purchases: int
+    average_consumption: float

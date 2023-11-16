@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
 from api.routers import sales
-from api.schemas.clients import SaleDetails
+from api.schemas.clients import Client, ClientDetail, SaleDetails
 from api.schemas.products import Product
 from api.service.sales import SalesService
 from service.clients import ClientsService
@@ -42,19 +42,14 @@ def generate_products_by_client_report(
     report_service: ReportService = Depends(get_reports_service),
 ):
     client = clients_service.find_one(client_id)
-    products_quantities: dict[str, int] = {}
-    for sale in client.sales:
-        product_name = sale.product.name
-        if sale.product in products_quantities:
-            products_quantities[product_name] += sale.quantity
-        else:
-            products_quantities[product_name] = sale.quantity
-    product_entries = [(key, value) for key, value in products_quantities.items()]
-    product_entries.sort(key=lambda x: x[1], reverse=True)
+    products = clients_service.get_clients_purchased_products(client_id)
     file_response_data = report_service.create_report(
         "produtos_por_cliente",
         "products_by_client.j2",
-        {"client": client, "products": product_entries},
+        {
+            "client": client,
+            "products": products,
+        },
     )
     return StreamingResponse(**file_response_data)
 
@@ -64,15 +59,7 @@ def generate_best_sellers_report(
     report_service: ReportService = Depends(get_reports_service),
     sales_service: SalesService = Depends(get_sales_service),
 ):
-    sales = sales_service.list_info()
-    product_quantities: dict[str, int] = {}
-    for sale in sales:
-        if sale.product_name in product_quantities:
-            product_quantities[sale.product_name] += sale.quantity
-        else:
-            product_quantities[sale.product_name] = sale.quantity
-    product_entries = [(key, value) for key, value in product_quantities.items()]
-    product_entries.sort(key=lambda x: x[1], reverse=True)
+    product_entries = sales_service.get_best_sellers()
     file_response_data = report_service.create_report(
         "mais_vendidos", "best_sellers.j2", {"products": product_entries}
     )
@@ -84,4 +71,10 @@ def generate_clients_average_consumption_report(
     report_service: ReportService = Depends(get_reports_service),
     clients_service: ClientsService = Depends(get_clients_service),
 ):
-    pass
+    clients_average_consumption = clients_service.get_average_consumption_by_client()
+    file_response_data = report_service.create_report(
+        "media_consumo_clientes",
+        "clients_average_consumption.j2",
+        {"clients": clients_average_consumption},
+    )
+    return StreamingResponse(**file_response_data)

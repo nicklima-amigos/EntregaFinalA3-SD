@@ -15,6 +15,38 @@ class ClientsRepository:
             for (id, name, created_at) in rows
         ]
 
+    def find_all_detailed(self):
+        rows = self.database.query(
+            """
+            SELECT 
+                c.id, c.name, c.created_at, s.id, s.quantity, p.id, p.name, p.price, p.brand
+            FROM 
+                clients c
+            LEFT JOIN 
+                sales s ON s.client_id = c.id
+            LEFT JOIN
+                products p ON p.id = s.product_id 
+        """
+        )
+        clients: dict[int, ClientDetail] = {}
+        for row in rows:
+            if row[0] not in clients:
+                clients[row[0]] = ClientDetail(
+                    id=row[0], name=row[1], created_at=row[2], sales=[]
+                )
+            if row[3] is not None:
+                sales = clients[row[0]].sales
+                sales.append(
+                    SaleWithProduct(
+                        id=row[3],
+                        quantity=row[4],
+                        product=ProductInformation(
+                            id=row[5], brand=row[8], name=row[6], price=row[7]
+                        ),
+                    )
+                )
+        return list(clients.values())
+
     def find_one(self, id: int):
         rows = self.database.query(
             """
