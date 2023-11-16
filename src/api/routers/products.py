@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from dependencies import get_products_service
-from schemas.products import CreateProduct, Product, UpdateProduct
+from schemas import CreateProduct, Product, UpdateProduct
 
-from service.products import ProductsService
+from service import ProductsService
 
 
 products_router = APIRouter(prefix="/products", tags=["products"])

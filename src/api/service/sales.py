@@ -1,8 +1,7 @@
 from fastapi import HTTPException
-from schemas.products import UpdateProduct
-from service.products import ProductsService
-from repository.sales import SalesRepository
-from schemas.sales import CreateSale, UpdateSale
+from schemas import UpdateProduct, CreateSale, UpdateSale
+from service import ProductsService
+from repository import SalesRepository
 
 
 class SalesService:
@@ -34,6 +33,18 @@ class SalesService:
     def delete(self, id: int):
         self.find_one(id)
         return self.repository.delete(id)
-    
+
     def list_info(self):
         return self.repository.list_info()
+
+    def get_best_sellers(self):
+        sales = self.list_info()
+        product_quantities: dict[str, int] = {}
+        for sale in sales:
+            if sale.product_name in product_quantities:
+                product_quantities[sale.product_name] += sale.quantity
+            else:
+                product_quantities[sale.product_name] = sale.quantity
+        product_entries = [(key, value) for key, value in product_quantities.items()]
+        product_entries.sort(key=lambda x: x[1], reverse=True)
+        return product_entries

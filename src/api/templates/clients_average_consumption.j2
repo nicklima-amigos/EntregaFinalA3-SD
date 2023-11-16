@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/style.css">
+        <style>
+            {{style}}
+        </style>
+    </head>
+    <body>
+        <h1>Média de consumo por cliente</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Total de compras</th>
+                    <th>Valor médio por compra</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.number_of_purchases }}</td>
+                    <td>R$ {{ '%0.2f'|format(client.average_consumption) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

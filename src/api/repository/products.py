@@ -1,5 +1,5 @@
-from persistence.database import Database
-from schemas.products import CreateProduct, Product, UpdateProduct
+from persistence import Database
+from schemas import CreateProduct, Product, UpdateProduct
 
 
 class ProductsRepository:
@@ -9,6 +9,15 @@ class ProductsRepository:
     def find_all(self):
         rows = self.database.query(
             "SELECT id, name, brand, price, quantity FROM products"
+        )
+        return [
+            Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
+            for (id, name, brand, price, quantity) in rows
+        ]
+
+    def find_depleting(self):
+        rows = self.database.query(
+            "SELECT id, name, brand, price, quantity FROM products WHERE quantity < 5 ORDER BY quantity ASC"
         )
         return [
             Product(id=id, name=name, brand=brand, price=price, quantity=quantity)
