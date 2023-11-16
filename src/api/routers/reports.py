@@ -1,4 +1,3 @@
-from math import prod
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
