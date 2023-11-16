@@ -11,7 +11,6 @@ from dependencies import (
 
 from service.reports import ReportService
 
-templates = Jinja2Templates(directory="templates")
 
 reports_router = APIRouter(prefix="/reports", tags=["reports"])
 
