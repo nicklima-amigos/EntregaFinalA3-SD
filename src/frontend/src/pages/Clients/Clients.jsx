@@ -5,9 +5,15 @@ import { SingleClient } from '../../components/clients/SingleClient/SingleClient
 import { useClients } from '../../hooks/useClients';
 import { Link } from 'react-router-dom';
 import { clientService } from '../../service/clients';
+import { useDownloadReport } from '../../hooks/useDownloadFile';
+import { reportService } from '../../service/reports';
 
 export function Clients() {
   const { clients, setClients } = useClients();
+  const downloadReport = useDownloadReport(
+    'relatorio-consumo-medio-por-cliente',
+    () => reportService.getClientsAverageConsumption()
+  );
 
   const handleDelete = (clientId) => {
     return async () => {
@@ -21,13 +27,16 @@ export function Clients() {
       <Link to='/clientes/cadastrar'>
         <Button sx={{ margin: 2 }}>Cadastrar Cliente</Button>
       </Link>
+      <Button color='secondary' onClick={downloadReport}>
+        Consumo médio por cliente
+      </Button>
 
       <Grid2
         container
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
-          maxWidth: '800px',
+          maxWidth: '1000px',
           margin: 'auto',
           textAlign: 'center',
         }}
@@ -47,7 +56,8 @@ export function Clients() {
           xs={12}
         >
           <Grid2 xs={4}>Nome:</Grid2>
-          <Grid2 xs={4}>Data de criação:</Grid2>
+          <Grid2 xs={2}>Data de criação:</Grid2>
+          <Grid2 xs={2}></Grid2>
           <Grid2 xs={2}></Grid2>
           <Grid2 xs={2}></Grid2>
         </Grid2>
