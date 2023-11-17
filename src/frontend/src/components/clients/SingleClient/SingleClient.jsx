@@ -2,9 +2,15 @@ import { Button } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { reportService } from '../../../service/reports';
+import { useDownloadReport } from '../../../hooks/useDownloadFile';
 
 export function SingleClient({ client, handleDelete }) {
   const { id, name, created_at } = client;
+  const downloadReport = useDownloadReport(`relatorio-${client.name}`, () =>
+    reportService.getProductsByClient(client.id)
+  );
+
   const createdAt = format(new Date(created_at), 'dd/MM/yyyy');
   return (
     <Grid2
@@ -32,7 +38,7 @@ export function SingleClient({ client, handleDelete }) {
           borderBottom: 'solid 1px black',
           marginTop: 1,
         }}
-        xs={4}
+        xs={2}
       >
         {createdAt}
       </Grid2>
@@ -49,6 +55,16 @@ export function SingleClient({ client, handleDelete }) {
       >
         <Button color='error' onClick={handleDelete}>
           Excluir
+        </Button>
+      </Grid2>
+      <Grid2
+        sx={{
+          borderBottom: 'solid 1px black',
+        }}
+        xs={2}
+      >
+        <Button color='secondary' onClick={downloadReport}>
+          Relatório
         </Button>
       </Grid2>
     </Grid2>
