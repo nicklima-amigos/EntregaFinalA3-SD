@@ -54,3 +54,9 @@ npm run start:all
 ```bash
 http://localhost:8000/docs
 ```
+
+6. <h4> Acessar Client através do navegador:
+
+```bash
+http://localhost:5173
+```
