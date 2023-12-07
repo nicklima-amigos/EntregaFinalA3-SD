@@ -51,7 +51,7 @@ export function SaleForm({ sale, handleSubmit }) {
       return;
     }
     const calculatedTotal = selectedProduct.price * quantity;
-    setTotalPrice(calculatedTotal);
+    setTotalPrice(calculatedTotal.toFixed(2));
     return;
   }, [product, quantity, products]);
 
