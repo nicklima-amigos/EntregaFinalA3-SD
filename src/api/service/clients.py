@@ -58,6 +58,8 @@ class ClientsService:
         ]
 
     def __calculate_client_average_consumption(self, client: ClientDetail):
+        if len(client.sales) == 0:
+            return 0
         total_spent = 0
         for sale in client.sales:
             total_spent += sale.product.price * sale.quantity

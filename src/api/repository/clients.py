@@ -35,11 +35,11 @@ class ClientsRepository:
         )
         clients: dict[int, ClientDetail] = {}
         for row in rows:
-            if row[0] not in clients:
+            if row[0] not in clients and row[0:3]:
                 clients[row[0]] = ClientDetail(
                     id=row[0], name=row[1], created_at=row[2], sales=[]
                 )
-            if row[3] is not None:
+            if all(row):
                 sales = clients[row[0]].sales
                 sales.append(
                     SaleWithProduct(
