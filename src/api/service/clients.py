@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from .helpers import sort_descending_by_value
+from .helpers import sort_dict_items_descending_by_value
 from repository import ClientsRepository
 from schemas import (
     ClientAverageConsumption,
@@ -43,7 +43,7 @@ class ClientsService:
                 products_quantities[product_name] += sale.quantity
             else:
                 products_quantities[product_name] = sale.quantity
-        return sort_descending_by_value(products_quantities)
+        return sort_dict_items_descending_by_value(products_quantities)
 
     def get_average_consumption_by_client(self):
         clients = self.repository.find_all_detailed()
