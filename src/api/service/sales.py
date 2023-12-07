@@ -46,4 +46,4 @@ class SalesService:
                 product_quantities[sale.product_name] += sale.quantity
             else:
                 product_quantities[sale.product_name] = sale.quantity
-        return sort_descending_by_value(product_quantities.items())
+        return sort_descending_by_value(product_quantities)
