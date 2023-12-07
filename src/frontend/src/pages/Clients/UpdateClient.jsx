@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClientForm } from '../../components/forms/Client';
 import { useSingleClient } from '../../hooks/useSingleClient';
@@ -14,19 +14,19 @@ export function UpdateClient() {
     navigate('/clientes');
   };
 
+  if (!client) {
+    return <CircularProgress />;
+  }
+
   return (
     <>
-      {client.length > 0 && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editando informações de {client.name}
-          </Typography>
-          <ClientForm handleSubmit={handleSubmit} client={client} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editando informações de {client.name}
+      </Typography>
+      <ClientForm handleSubmit={handleSubmit} client={client} />
     </>
   );
 }

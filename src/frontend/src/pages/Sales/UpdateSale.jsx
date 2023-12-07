@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { SaleForm } from '../../components/forms/Sale';
 import { useSingleSale } from '../../hooks/useSingleSale';
@@ -14,19 +14,19 @@ export function UpdateSale() {
     navigate('/vendas');
   };
 
+  if (!sale) {
+    return <CircularProgress />;
+  }
+
   return (
     <>
-      {sale && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editar venda
-          </Typography>
-          <SaleForm sale={sale} handleSubmit={handleSubmit} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editar venda
+      </Typography>
+      <SaleForm sale={sale} handleSubmit={handleSubmit} />
     </>
   );
 }

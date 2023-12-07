@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
-from fastapi.templating import Jinja2Templates
 from service import SalesService, ClientsService, ProductsService
 from dependencies import (
     get_clients_service,
@@ -22,7 +21,9 @@ def generate_depleting_products_report(
 ):
     depleting_products = products_service.find_depleting()
     file_response_data = report_service.create_report(
-        "baixo_estoque", "depleting_products.j2", {"products": depleting_products}
+        report_name="baixo_estoque",
+        template_name="depleting_products.j2",
+        context={"products": depleting_products},
     )
     return StreamingResponse(**file_response_data)
 
@@ -36,9 +37,9 @@ def generate_products_by_client_report(
     client = clients_service.find_one(client_id)
     products = clients_service.get_clients_purchased_products(client)
     file_response_data = report_service.create_report(
-        "produtos_por_cliente",
-        "products_by_client.j2",
-        {
+        report_name="produtos_por_cliente",
+        template_name="products_by_client.j2",
+        context={
             "client": client,
             "products": products,
         },
@@ -53,7 +54,9 @@ def generate_best_sellers_report(
 ):
     product_entries = sales_service.get_best_sellers()
     file_response_data = report_service.create_report(
-        "mais_vendidos", "best_sellers.j2", {"products": product_entries}
+        report_name="mais_vendidos",
+        template_name="best_sellers.j2",
+        context={"products": product_entries},
     )
     return StreamingResponse(**file_response_data)
 
@@ -65,8 +68,8 @@ def generate_clients_average_consumption_report(
 ):
     clients_average_consumption = clients_service.get_average_consumption_by_client()
     file_response_data = report_service.create_report(
-        "media_consumo_clientes",
-        "clients_average_consumption.j2",
-        {"clients": clients_average_consumption},
+        report_name="media_consumo_clientes",
+        template_name="clients_average_consumption.j2",
+        context={"clients": clients_average_consumption},
     )
     return StreamingResponse(**file_response_data)

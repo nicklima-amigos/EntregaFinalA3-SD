@@ -1,7 +1,7 @@
 fixtures = """
     INSERT INTO clients (id,name) VALUES 
     (1,"Joao Luccas"),
-    (2,"Rafael Oliveira"),
+    (2,"Raphael Oliveira"),
     (3,"Nicolas Lima"),
     (4,"Marcos Henrique"),
     (5,"Bruna Cesar");

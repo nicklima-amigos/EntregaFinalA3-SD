@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Button, TextField } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import styled from "@emotion/styled";
+import { useState } from 'react';
+import { Button, TextField } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import styled from '@emotion/styled';
 
 const Grid2Centralized = styled(Grid2)`
   .MuiFormControl-root {
@@ -11,9 +11,9 @@ const Grid2Centralized = styled(Grid2)`
 `;
 
 export function ProductForm({ product, handleSubmit }) {
-  const [name, setName] = useState(product?.name || "");
+  const [name, setName] = useState(product?.name || '');
   const [nameIsValid, setNameIsValid] = useState(true);
-  const [brand, setBrand] = useState(product?.brand || "");
+  const [brand, setBrand] = useState(product?.brand || '');
   const [brandIsValid, setBrandIsValid] = useState(true);
   const [price, setPrice] = useState(product?.price || 0);
   const [priceIsValid, setPriceIsValid] = useState(true);
@@ -26,11 +26,11 @@ export function ProductForm({ product, handleSubmit }) {
     setPriceIsValid(true);
     setQuantityIsValid(true);
     let errors = 0;
-    if (name.length < 3) {
+    if (name.length < 2) {
       setNameIsValid(false);
       errors++;
     }
-    if (brand.length < 3) {
+    if (brand.length < 2) {
       setBrandIsValid(false);
       errors++;
     }
@@ -47,7 +47,7 @@ export function ProductForm({ product, handleSubmit }) {
 
   return (
     <form
-      action=""
+      action=''
       onSubmit={async (e) => {
         e.preventDefault();
         if (formIsValid()) {
@@ -58,53 +58,53 @@ export function ProductForm({ product, handleSubmit }) {
       <Grid2Centralized
         container
         xs={4}
-        sx={{ textAlign: "center", margin: "auto" }}
+        sx={{ textAlign: 'center', margin: 'auto' }}
       >
         <TextField
-          name="name"
+          name='name'
           value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
-          label="Nome"
+          label='Nome'
           error={!nameIsValid}
-          helperText={nameIsValid ? "" : "Nome deve ter no mínimo 3 caracteres"}
+          helperText={nameIsValid ? '' : 'Nome deve ter no mínimo 3 caracteres'}
         />
         <TextField
-          name="brand"
+          name='brand'
           value={brand}
           onChange={(e) => {
             setBrand(e.target.value);
           }}
-          label="Marca"
+          label='Marca'
           error={!brandIsValid}
           helperText={
-            brandIsValid ? "" : "Marca deve ter no mínimo 3 caracteres"
+            brandIsValid ? '' : 'Marca deve ter no mínimo 3 caracteres'
           }
         />
         <TextField
-          name="price"
+          name='price'
           value={price}
           onChange={(e) => {
             setPrice(e.target.value);
           }}
-          label="Preço"
+          label='Preço'
           error={!priceIsValid}
-          helperText={priceIsValid ? "" : "Preço não pode ser zero ou negativo"}
+          helperText={priceIsValid ? '' : 'Preço não pode ser zero ou negativo'}
         />
         <TextField
-          name="quantity"
+          name='quantity'
           value={quantity}
           onChange={(e) => {
             setQuantity(e.target.value);
           }}
-          label="Quantidade"
+          label='Quantidade'
           error={!quantityIsValid}
-          helperText={quantityIsValid ? "" : "Quantidade não pode ser negativa"}
+          helperText={quantityIsValid ? '' : 'Quantidade não pode ser negativa'}
         />
       </Grid2Centralized>
-      <Grid2 xs={12} sx={{ textAlign: "center", marginTop: "20px" }}>
-        <Button type="submit">Salvar</Button>
+      <Grid2 xs={12} sx={{ textAlign: 'center', marginTop: '20px' }}>
+        <Button type='submit'>Salvar</Button>
       </Grid2>
     </form>
   );

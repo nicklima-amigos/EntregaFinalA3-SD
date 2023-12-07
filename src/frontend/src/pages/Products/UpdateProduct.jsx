@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductForm } from '../../components/forms/Product';
 import { useSingleProduct } from '../../hooks/useSingleProduct';
@@ -14,19 +14,19 @@ export function UpdateProduct() {
     navigate('/produtos');
   };
 
+  if (!product) {
+    return <CircularProgress />;
+  }
+
   return (
     <>
-      {product.length > 0 && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editar produto
-          </Typography>
-          <ProductForm product={product} handleSubmit={handleSubmit} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editar produto
+      </Typography>
+      <ProductForm product={product} handleSubmit={handleSubmit} />
     </>
   );
 }

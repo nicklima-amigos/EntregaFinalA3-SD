@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { clientService } from '../service/clients';
 import { useState } from 'react';
 
-export function useSingleClient({ clientId }) {
+export function useSingleClient(clientId) {
   const [client, setClient] = useState();
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export function useSingleClient({ clientId }) {
     };
 
     getSingleClient();
-  });
+  }, [clientId]);
 
   return { client, setClient };
 }
