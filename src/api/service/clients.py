@@ -42,7 +42,7 @@ class ClientsService:
                 products_quantities[product_name] += sale.quantity
             else:
                 products_quantities[product_name] = sale.quantity
-        product_entries = [(key, value) for key, value in products_quantities.items()]
+        product_entries = list(products_quantities.items())
         product_entries.sort(key=lambda x: x[1], reverse=True)
         return product_entries
 

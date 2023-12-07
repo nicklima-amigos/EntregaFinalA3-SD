@@ -45,6 +45,11 @@ class SalesService:
                 product_quantities[sale.product_name] += sale.quantity
             else:
                 product_quantities[sale.product_name] = sale.quantity
-        product_entries = [(key, value) for key, value in product_quantities.items()]
-        product_entries.sort(key=lambda x: x[1], reverse=True)
-        return product_entries
+        product_entries = list(product_quantities.items())
+        return self.__sort_descending_by_value(product_entries)
+
+    def __sort_descending_by_value(
+        self, entries: list[tuple[str, int]]
+    ) -> list[tuple[str, int]]:
+        entries.sort(key=lambda x: x[1], reverse=True)
+        return entries
