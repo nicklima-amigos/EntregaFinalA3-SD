@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+from .helpers import sort_dict_items_descending_by_value
 from schemas import UpdateProduct, CreateSale, UpdateSale
 from service import ProductsService
 from repository import SalesRepository
@@ -45,6 +46,4 @@ class SalesService:
                 product_quantities[sale.product_name] += sale.quantity
             else:
                 product_quantities[sale.product_name] = sale.quantity
-        product_entries = [(key, value) for key, value in product_quantities.items()]
-        product_entries.sort(key=lambda x: x[1], reverse=True)
-        return product_entries
+        return sort_dict_items_descending_by_value(product_quantities)

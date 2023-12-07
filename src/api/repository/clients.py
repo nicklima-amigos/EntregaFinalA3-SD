@@ -79,7 +79,7 @@ class ClientsRepository:
                 ),
             )
             for row in rows
-            if row[3] is not None
+            if all(row[3:])
         ]
         return ClientDetail(
             id=rows[0][0], name=rows[0][1], created_at=rows[0][2], sales=sales

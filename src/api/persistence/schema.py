@@ -21,7 +21,7 @@ schema = """
         product_id INTEGER NOT NULL,
         quantity INTEGER NOT NULL,
         sold_at DATETIME DEFAULT (datetime('now','localtime')),
-        FOREIGN KEY (client_id) REFERENCES clients (id),
-        FOREIGN KEY (product_id) REFERENCES products (id)
+        FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
     );
 """

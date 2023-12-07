@@ -27,7 +27,7 @@ def create(sale: CreateSale, service: SalesService = Depends(get_sales_service))
     return service.create(sale)
 
 
-@sales_router.put("/{id}", response_model=Sale)
+@sales_router.put("/{id}")
 def update(
     id: int, sale: UpdateSale, service: SalesService = Depends(get_sales_service)
 ):
