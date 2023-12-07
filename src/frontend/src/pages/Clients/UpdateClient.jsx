@@ -14,19 +14,19 @@ export function UpdateClient() {
     navigate('/clientes');
   };
 
+  if (!client) {
+    return <Typography variant='h3'>Carregando...</Typography>;
+  }
+
   return (
     <>
-      {client.length > 0 && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editando informações de {client.name}
-          </Typography>
-          <ClientForm handleSubmit={handleSubmit} client={client} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editando informações de {client.name}
+      </Typography>
+      <ClientForm handleSubmit={handleSubmit} client={client} />
     </>
   );
 }

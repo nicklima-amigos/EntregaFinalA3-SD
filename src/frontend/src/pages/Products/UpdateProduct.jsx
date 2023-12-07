@@ -14,19 +14,19 @@ export function UpdateProduct() {
     navigate('/produtos');
   };
 
+  if (!product) {
+    return <Typography variant='h3'>Carregando...</Typography>;
+  }
+
   return (
     <>
-      {product.length > 0 && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editar produto
-          </Typography>
-          <ProductForm product={product} handleSubmit={handleSubmit} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editar produto
+      </Typography>
+      <ProductForm product={product} handleSubmit={handleSubmit} />
     </>
   );
 }

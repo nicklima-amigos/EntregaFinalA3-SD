@@ -14,19 +14,19 @@ export function UpdateSale() {
     navigate('/vendas');
   };
 
+  if (!sale) {
+    return <Typography variant='h3'>Carregando...</Typography>;
+  }
+
   return (
     <>
-      {sale && (
-        <>
-          <Typography
-            variant='h3'
-            sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
-          >
-            Editar venda
-          </Typography>
-          <SaleForm sale={sale} handleSubmit={handleSubmit} />
-        </>
-      )}
+      <Typography
+        variant='h3'
+        sx={{ textAlign: 'center', fontSize: 30, margin: 2 }}
+      >
+        Editar venda
+      </Typography>
+      <SaleForm sale={sale} handleSubmit={handleSubmit} />
     </>
   );
 }
