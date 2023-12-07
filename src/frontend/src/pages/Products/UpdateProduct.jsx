@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductForm } from '../../components/forms/Product';
 import { useSingleProduct } from '../../hooks/useSingleProduct';
@@ -15,7 +15,7 @@ export function UpdateProduct() {
   };
 
   if (!product) {
-    return <Typography variant='h3'>Carregando...</Typography>;
+    return <CircularProgress />;
   }
 
   return (

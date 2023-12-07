@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClientForm } from '../../components/forms/Client';
 import { useSingleClient } from '../../hooks/useSingleClient';
@@ -15,7 +15,7 @@ export function UpdateClient() {
   };
 
   if (!client) {
-    return <Typography variant='h3'>Carregando...</Typography>;
+    return <CircularProgress />;
   }
 
   return (
